@@ -1,6 +1,6 @@
 const CLIENT_ID = '44639973669-tmdvdp0ugud488t3iarcbqn7ieuu9hlf.apps.googleusercontent.com';
 const API_KEY = 'AIzaSyD8dArG_JyWaYnQgZ5HTVs_Wo75TfFCBzA';
-const CORREO_ADMIN = "emiliano.hidalgo@extrategia.com";
+const CORREO_ADMIN = "arturo.pega@extrategia.com";
 const CORREO_ADMIN_FINANCIERO = "emiliano.hidalgo@extrategia.com";
 
 // Array of API discovery doc URLs for APIs used by the quickstart
