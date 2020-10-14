@@ -71,13 +71,15 @@ function crearListaDePadres() {
         'corpora': "allDrives",
         'includeItemsFromAllDrives': true,
         'supportsAllDrives': true,
-        'fields': "nextPageToken, files(id, name)"
+        'pageSize': 1000,
+        'fields': "nextPageToken, files(id, name, webContentLink)"
     }).then(function (response) {
         var files = response.result.files;
         if (files && files.length > 0) {
             files.forEach(file => {
                 listaDeIdDeCarpetasPadre.push(file.id);
             });
+            console.log(files.length);
             listaDeIdDeCarpetasPadre.forEach(id => {
                 queryPadres = queryPadres + "'" + id + "' in parents or ";
             });
