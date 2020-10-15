@@ -1,6 +1,5 @@
-const listaDeIdDeCarpetasPadre = [];
-var queryPadres = "";
 var propuestaSeleccionada = "";
+const listaArchivos = [];
 
 const tablaResultados = document.getElementById('cuerpo-tabla');
 const divEstrategias = document.getElementById('div-estrategias');
@@ -60,23 +59,36 @@ function transferir() {
 
 function actualizarUIBuscador() {
     actualizarUILogged();
-    crearListaDePadres();
-    if(esAdmin())
+    crearListaDePadres("");
+    if (esAdmin())
         actualizarUIAdmin();
 }
 
-function crearListaDePadres() {
+function crearListaDePadres(token) {
+    let listaDeIdDeCarpetasPadre = [];
+    let queryPadres = "";
     gapi.client.drive.files.list({
         'q': "'0AA9UZB_ARqnhUk9PVA' in parents and mimeType = 'application/vnd.google-apps.folder'",
         'corpora': "allDrives",
         'includeItemsFromAllDrives': true,
         'supportsAllDrives': true,
-        'pageSize': 1000,
-        'fields': "nextPageToken, files(id, name, webContentLink)"
+        'pageToken': token,
+        'fields': "nextPageToken, files(id, name)"
     }).then(function (response) {
-        var files = response.result.files;
+        let files = response.result.files;
+        let nToken = response.result.nextPageToken;
         if (files && files.length > 0) {
             files.forEach(file => {
+                if (listaDeIdDeCarpetasPadre.length > 100) {
+
+                    queryPadres = queryPadres.slice(0, -4);
+                    listaDeIdDeCarpetasPadre.forEach(id => {
+                        queryPadres = queryPadres + "'" + id + "' in parents or ";
+                    });
+                    listFiles(queryPadres);
+                    queryPadres = "";
+                    listaDeIdDeCarpetasPadre = [];
+                }
                 listaDeIdDeCarpetasPadre.push(file.id);
             });
             console.log(files.length);
@@ -84,12 +96,23 @@ function crearListaDePadres() {
                 queryPadres = queryPadres + "'" + id + "' in parents or ";
             });
             queryPadres = queryPadres.slice(0, -4);
-            listFiles("");
+            listFiles(queryPadres);
+            queryPadres = "";
+        }
+        if (nToken) {
+            listFiles(queryPadres);
+            crearListaDePadres(nToken);
+            queryPadres = "";
+            listaDeIdDeCarpetasPadre = [];
+        }
+
+        else {
+            configurarTabla();
         }
     });
 }
 
-function actualizarUIAdmin(){
+function actualizarUIAdmin() {
     botonEditar.hidden = false;
     inputMonto.disabled = false;
     divCrearEstrategias.hidden = false;
@@ -103,7 +126,9 @@ function handleAuthClick(event) {
     gapi.auth2.getAuthInstance().signIn();
 }
 
-function listFiles(terminos) {
+function listFiles(queryPadres) {
+    if (queryPadres === "")
+        return;
     limpiarTabla();
     let query = ["mimeType != 'application/vnd.google-apps.folder'",
         "and",
@@ -121,15 +146,15 @@ function listFiles(terminos) {
         var files = response.result.files;
         if (files && files.length > 0) {
             files.forEach(function (file, i) {
-                tablaResultados.appendChild(crearHilera(file));
+                listaArchivos.push(file);
             });
-            configurarTabla();
         }
         else $('.toast').toast('show');
     });
 }
 
 function configurarTabla() {
+    listaArchivos.forEach(archivo => tablaResultados.appendChild(crearHilera(archivo)));
     $("#example1").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
