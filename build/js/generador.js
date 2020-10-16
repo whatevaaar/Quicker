@@ -1,4 +1,5 @@
 const tablaModal = document.getElementById("tabla-modal");
+const tablaModalPadre = document.getElementById("tabla-modal-padre");
 const parrafoTotal = document.getElementById("p-total");
 
 
@@ -62,4 +63,24 @@ function crearHilera(propuesta) {
     hilera.setAttribute("scope", "row");
     return hilera;
 
+}
+
+function generar() {
+
+    pdfMake.createPdf(createTableDoc()).open();
+}
+
+function createTableDoc() {
+    var wdths= [];
+    for (var i = 0; i < tablaModalPadre.rows[0].cells.length; i++) {
+        var cell = tablaModalPadre.rows[0].cells[i];
+        wdths[i] = (cell.style.width != "" ? cell.style.width : cell.style.offsetWidth); //if the cell's style width is not set, get its' actual width
+    }
+
+    var bdy;
+    for (var y = 0; y < tablaModalPadre.rows.length; y++)
+        for (var x = 0; x < tablaModalPadre.rows[y].cells.length; x++)
+            bdy[y][x] = tablaModalPadre.rows[y].cells[x].innerHTML;
+    var docDef = {content: [{table: {headerRows: 1, widths: wdths, body: bdy}}]};
+    return docDef;
 }
