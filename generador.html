@@ -1,0 +1,2990 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quicker!</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="dist/css/mycss.css">
+</head>
+
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="index.html" class="nav-link">Inicio</a>
+        </li>
+      </ul>
+
+      <!-- SEARCH FORM -->
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="#" id="boton-signout" class="nav-link">Sign Out</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="index.html" class="brand-link">
+        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+          style="opacity: .8">
+        <span class="brand-text font-weight-light">Quicker!</span>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="" id="img-perfil" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="d-block" id="nombre-perfil"></a>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">
+                <i class="nav-icon fas fa-search"></i>
+                <p>
+                  Búsqueda de propuestas
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="analytic.html" class="nav-link">
+                <i class="nav-icon fas fa-chart-pie"></i>
+                <p>
+                  Analytic
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  Generador de Estrategias
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="pendientes.html" class="nav-link">
+                <i class="nav-icon fas fa-file"></i>
+                <p>Pendientes de aprobación</p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Generador de Estrategias</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                <li class="breadcrumb-item active">Generador de Estrategias</li>
+              </ol>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Estrategias</h3>
+                </div>
+                <!-- ./card-header -->
+                <div class="card-body p-0">
+                  <table class="table table-hover">
+                    <tbody>
+                      <tr data-widget="expandable-table" aria-expanded="false">
+                        <td>
+                          <i class="fas fa-caret-right fa-fw"></i>
+                          Comunicación
+                        </td>
+                      </tr>
+                      <tr class="expandable-body">
+                        <td>
+                          <div class="p-0">
+                            <table class="table table-hover">
+                              <tbody>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Paquete de documentación estratégico
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo $120,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="120000"
+                                              data-nombre="Paquete de documentación estratégico" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Líneas de comunicación y mensajes clave
+                                              Q&As Proactivos y reactivos
+                                              Talking points para reuniones con medios
+                                              Hojas de datos duros
+                                              Escenarios y posturas
+                                              Discursos
+                                              Generación de reportes especiales de medios y clippings</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Manuales de comunicación, externa, interna, crisis
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo $380,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="380000"
+                                              data-nombre="Manuales de comunicación, externa, interna, crisis"
+                                              placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Generar un documento universal que englobe las políticas y mejores
+                                              prácticas de comunicación estableciendo una serie de escenarios reales, la
+                                              mejor forma de actuar en cada uno de ellos y la política de la compañía
+                                              para presentarse frente a los medios de comunicación.
+                                              Diseño estratégico de contenido
+                                              Edición
+                                              Diseño editorial</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-widget="expandable-table" aria-expanded="false">
+                        <td>
+                          <i class="fas fa-caret-right fa-fw"></i>
+                          Medios
+                        </td>
+                      </tr>
+                      <tr class="expandable-body">
+                        <td>
+                          <div class="p-0">
+                            <table class="table table-hover">
+                              <tbody>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Presencia Básica
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 120,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="120000"
+                                              data-nombre="Presencia Básica">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Elaboración y envío de contenidos a medios de comunicación.
+                                              Posicionamiento del vocero.
+                                              Casos de éxito.
+                                              Análisis de coyunturas para detección de oportunidades en medios.
+                                              Redacción y envío de comunicados de prensa.
+                                              Monitoreo de notas y reportes.
+
+                                              Notas en medios impresos
+                                              Reportaje en revista
+                                              Mención en radio
+                                              Presencia en TV
+                                              Presencia en internet
+                                              Blindaje con KOLs
+                                              Press Office</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Día de medios
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 180,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="180000"
+                                              data-nombre="Día de medios" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Generar un documento universal que englobe las políticas y mejores
+                                              prácticas de comunicación estableciendo una serie de escenarios reales, la
+                                              mejor forma de actuar en cada uno de ellos y la política de la compañía
+                                              para presentarse frente a los medios de comunicación.
+                                              Diseño estratégico de contenido
+                                              Edición
+                                              Diseño editorial</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Media Tours
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 360,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="360000"
+                                              data-nombre="Media Tours" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Viajes con medios
+                                              Entrevistas y participaciones en espacios mediáticos.
+                                              Detección de coyunturas relacionadas a la industria.
+                                              Búsqueda de espacios mediáticos relacionados al negocios y la inversión.
+                                              Briefing books
+                                              Acompañamiento en entrevistas.
+                                              Monitoreo de notas de entrevistas.
+
+                                              Sin viáticos</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Convocatoria de eventos para medios
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 180,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="180000"
+                                              data-nombre="Convocatoria de eventos para medios" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>La métrica de medios se define en base al proyecto.
+
+                                              Briefing books de medios, periodistas y líderes de opinión.
+                                              Armado de base de medios por fuente.
+                                              Convocatoria y confirmación a medios de comunicación.
+                                              Registro de medios en evento presencial o virtual
+                                              Desarrollo y distribución de press kit.
+                                              Desarrollo de boletín de prensa.
+                                              Envío de boletín de prensa a fuentes especializadas.
+                                              Entrevistas durante el evento:
+                                              1 Gestión de entrevistas con periodistas clave.
+                                              2. Entrega de press kit especial.
+                                              3. Atención a medios.
+                                              4. Coordinación de entrevistas de 15 minutos.
+                                              Seguimiento a publicaciones derivadas del boletín.
+                                              Cobertura de un fotógrafo de la agencia para documentar el evento.
+                                              Elaboración de reporte de resultados</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Consejo de periodistas
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 150,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="150000"
+                                              data-nombre="Consejo de periodistas" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Red de directores generales, directores editoriales, dueños de medios,
+                                              columnistas y editores aliados para fortalecer el relacionamiento o
+                                              posicionamiento de la empresa (marca) y convertirlos en voceros
+                                              multiplicadores de los mensajes clave.
+
+                                              Convocatoria de columnistas y editores de las fuentes estratégicas.
+
+                                              Desayuno o reunión virtual para presentación periódica de información de
+                                              la marca, tendencias, negocio, entre otros aspectos.
+
+                                              Elaboración de mensajes clave e infografías sobre temas a presentar.
+
+                                              Seguimiento a solicitudes y publicaciones.
+
+                                              Envío constante de información a los miembros del Consejo.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Entrevistas one on one
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 30,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="30000"
+                                              data-nombre="Entrevistas one on one" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Acercamiento con periodistas altamente posicionados como referentes de
+                                              su fuente informativa en el país.
+
+                                              Monitoreo y valoración de las notas generadas.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Cambio de percepción mediática
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 360,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="360000"
+                                              data-nombre="Cambio de percepción mediática" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Buscar cambiar la opinión del medio acercándole información de valor y
+                                              entendiendo todas las aristas evitando confrontarlo.
+
+                                              Acercamientos con editores y reporteros de los medios para establecer una
+                                              relación de cooperación y entendimiento con la marca.
+
+                                              Gestión de reuniones con editores de las fuentes informativas
+                                              Preparación de documentación estratégica
+                                              Acercamientos efectivos con los medios locales o nacionales
+                                              Apoyo en negociaciones y cuerdos
+                                              Seguimiento puntual a notas de los medios posteriores a reuniones
+                                              Búsqueda de contactos alternos que refuercen la relación</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Columnas Fijas
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 50,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="50000"
+                                              data-nombre="Columnas Fijas" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Gestion de espacio estratégico en medio de comunicación tier 1</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-widget="expandable-table" aria-expanded="false">
+                        <td>
+                          <i class="fas fa-caret-right fa-fw"></i>
+                          Relaciones Públicas
+                        </td>
+                      </tr>
+                      <tr class="expandable-body">
+                        <td>
+                          <div class="p-0">
+                            <table class="table table-hover">
+                              <tbody>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Relaciones mediáticas / Seminarios
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 120,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="120000"
+                                              data-nombre="Relaciones mediáticas / Seminarios" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Realizar un seminario que permita generar opinión pública favorable de
+                                              la compañía y los temas relacionados al sector.
+
+                                              Mapeo y convocatoria de los principales reporteros y medios afines al
+                                              target.
+                                              Propuesta de agenda temática
+                                              Desarrollo de seminario teórico-práctico.
+                                              Elaboración de entregables para asistentes.
+                                              Coordinación de logística presencial o virtual.
+                                              Creación de un glosario práctico del sector.
+                                              Entrega de reconocimiento por asistencia.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Relaciones mediáticas / Pláticas
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 120,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="120000"
+                                              data-nombre="Relaciones mediáticas / Pláticas" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Acercamiento con grupos editoriales para generar una plática del vocero
+                                              oficial dirigida a colaboradores de diferentes niveles en la organización.
+                                              1 hora presencial o virtual.
+                                              Coordinación de agenda con medio.
+                                              Diseño de invitación electrónica.
+                                              Apoyo logístico durante la charla.
+                                              Gestión de entrevista al término de la plática.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Relaciones empresariales
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 120,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="120000"
+                                              data-nombre="Relaciones empresariales" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Generar sinergias y acuerdos con empresas y organizaciones para estar
+                                              presente en sus eventos estratégicos y dar a conocer la cartera de
+                                              opciones de la marca al tiempo de posicionar cada una de sus soluciones
+                                              entre la red de influencia EXTRATEGIA.
+
+                                              Presentación en comité de comunicación y marketing Extrategia.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Relaciones sociales
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 120,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="120000"
+                                              data-nombre="Relaciones sociales" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Generar sinergias y acuerdos con organismos y actores clave de la
+                                              sociedad civil por medio de acercamientos estratégicos de alto nivel.
+
+                                              Fundaciones
+                                              ONG's
+                                              Organismos sociales</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Relaciones comerciales
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 120,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="120000"
+                                              data-nombre="Relaciones comerciales" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Relacionamiento con tomadores de decisión para buscar acercamientos con
+                                              sus organizaciones y buscar la generación de sinergias o alianzas.
+
+                                              Stakeholding mapping por sectores
+                                              Análisis del networking
+                                              Generación de materiales especiales para apertura de puertas
+                                              Gestión de reuniones 1:1
+                                              Seguimiento a acuerdos y resultados
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Relaciones académicas
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 120,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="120000"
+                                              data-nombre="Relaciones académicas" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Posicionamiento de la marca frente a universidades y escuelas de negocio
+                                              clave.
+
+                                              Mapeo de foros universitarios.
+                                              Gestión de participación.
+                                              Levantamiento de ponencias para virilizarlo en redes sociales.
+                                              Consultoría en preparación de ponencia:
+                                              Coaching de public speaking.
+                                              Desarrollo de documentos y presentaciones.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Visibilidad del CEO
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 120,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="120000"
+                                              data-nombre="Visibilidad del CEO" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Ponencias en Foros de alto impacto:
+
+                                              Mapeo de para estar en la conversación de las empresas.
+                                              Gestión de participación como ponente e invitado.
+
+                                              Visibilidad estratégica:
+                                              Entrevistas con medios estratégicos.
+                                              Bylines para medios de comunicación.
+
+                                              Reputación digital:
+                                              Revisión, puesta en punto y manejo de perfiles LinkedIn y Twitter.
+                                              Generación de 1 posteos semanal y retweets coyunturales.
+                                              Activación de Google Alerts para monitorizar presencia digital.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Lanzamientos
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 360,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="360000"
+                                              data-nombre="Lanzamientos" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>60 días de trabajo
+                                              La métrica de medios se define en base al proyecto.
+
+                                              Briefing books de medios, periodistas y líderes de opinión.
+                                              Armado de base de medios por fuente.
+                                              Desarrollo de boletín de prensa.
+                                              Envío de boletín de prensa a fuentes especializadas.
+                                              Entrevistas:
+                                              1 Gestión de entrevistas con periodistas clave.
+                                              2. Entrega de press kit especial.
+                                              Seguimiento a publicaciones derivadas del boletín.
+                                              Elaboración de reporte de resultados</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Reuniones de relacionamiento
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 30,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="30000"
+                                              data-nombre="Reuniones de relacionamiento" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Gestión de reuniones de relacionamiento con contactos tier 1</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Acercamientos con líderes de opinión
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 30,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="30000"
+                                              data-nombre="Acercamientos con líderes de opinión" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Reuniones y entrevistas uno a uno para tratar estratégicamente los
+                                              mensajes clave, el plan de negocio y tamaño del desarrollo así como el
+                                              conocimiento del vocero en el terreno de la inversión de capitales en el
+                                              sector inmobiliario.
+
+                                              Coordinación de reuniones con editores, columnistas y titulares.
+                                              Desarrollo de briefing books para cada acercamiento.
+                                              Acompañamiento y seguimiento a acuerdos en reuniones.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Influencers Y Celebrities
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 80,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="80000"
+                                              data-nombre="Acercamientos con líderes de opinión" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Generar sinergias con influencers top que ayuden a relatar su
+                                              experiencia a favor de la marca en sus plataformas sociales.
+                                              Búsqueda y mapeo de mejores perfiles
+                                              Diseño de experiencia
+                                              Coordinación
+                                              Acompañamiento y contacto con influencer
+                                              Entrega de give aways
+                                              Monitoreo de posts</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Eventos
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 0,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="000"
+                                              data-nombre="Eventos" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Elaboración de evento estrategico a la medida:
+
+                                              Diseño de concepto
+                                              Coordinación
+                                              Montaje
+                                              Venue
+                                              Catering
+                                              Producción</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Presencia en foros
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 80,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="80000"
+                                              data-nombre="Presencia en foros" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Reforzar la credibilidad de la marca a través de sus voceros, en los
+                                              foros, organizaciones y escuelas más relevantes del mundo de los negocios
+                                              en México.
+                                              Costo por foro</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Alianzas estratégicas
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 50,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="50000"
+                                              data-nombre="Alianzas estratégicas" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Acercamiento y reuniones con stekeholders estratégicos y cámaras
+                                              empresariales.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                              </tbody>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr data-widget="expandable-table" aria-expanded="false">
+                        <td>
+                          <i class="fas fa-caret-right fa-fw"></i>
+                          Digital
+                        </td>
+                      </tr>
+                      <tr class="expandable-body">
+                        <td>
+                          <div class="p-0">
+                            <table class="table table-hover">
+                              <tbody>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Manejo de redes sociales
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 90,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="90000"
+                                              data-nombre="Manejo de redes sociales" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Diseño de plan editorial digital
+                                              Creación de contenidos:
+                                              Elaboración de calendario de contenidos
+                                              Diseño semanal de contenidos
+                                              Textos
+                                              Videos
+                                              Fotografías
+                                              Descargables
+                                              Administración de comunidad y community
+                                              Administración de comunidad
+                                              Reportes de performance mensual</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Campañas Display Ads
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 0,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="0000"
+                                              data-nombre="Campañas Display Ads" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Generar presencia en los principales portales de circulación en México
+                                              que consulta el target
+
+                                              Diseño de segmentación:
+                                              Demográficos generales
+                                              Intereses y gustos
+                                              Edad
+                                              Sexo
+                                              Regiones
+                                              Medios de su preferencia
+                                              Adaptación de artes del cliente
+                                              Administración de pautas básicas</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Campaña de redes sociales
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 0,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="0000"
+                                              data-nombre="Campaña de redes sociales" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Campaña en redes
+                                              Elaboración de artes
+                                              Administración de pauta
+                                              Ajustes a la estrategia
+                                              Reporte de performance mensual</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Hostings, Dominios
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 9,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="9000"
+                                              data-nombre="Hostings, Dominios" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Búsqueda y contratación de nombres de dominio
+                                              Hosting plan básico</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Páginas Web
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 120,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="120000"
+                                              data-nombre="Páginas Web" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Diseño de concepto web
+                                              Wire Frames
+                                              Muckups digitales
+                                              Arquitectura de temas
+                                              Coordinación de contenidos del cliente
+                                              Diseño web
+                                              Programación
+                                              Integración de codigos social media y analíticos
+                                              Páginas piloto en ambientes de prueba
+                                              Pruebas de performance
+                                              Puesta en punto
+                                              Liberación
+                                              30 temas</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Mantenimiento web
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 15,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="15000"
+                                              data-nombre="Mantenimiento Web" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Mantenimiento a sitio web:
+                                              Contenidos
+                                              Bugs
+                                              Analíticas</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Aplicaciones digitales
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 360,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="360000"
+                                              data-nombre="Aplicaciones digitales" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Diseño de concepto
+                                              Muckups digitales
+                                              Arquitectura
+                                              Experiencia y contenidos
+                                              Diseño web y programación
+                                              Pruebas de performance
+                                              Puesta en punto
+                                              Liberación</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Landing pages para campañas
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 25,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="25000"
+                                              data-nombre="Landing pages para campañas" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Capturar el tráfico de las campañas web y social media para direccionar
+                                              a visitantes directo a un formulario de Captura de Leads.
+
+                                              Construcción de landing page que diferencien y separ el tráfico
+                                              proveniente de las campañas
+                                              Programación
+                                              Puesta en línea
+                                              Medición mensual</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Gestión de Whatsapp Business
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 80,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="80000"
+                                              data-nombre="Gestión de Whatsapp Business" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Generación de un canal de contacto 1:1 con prospectos interesados en la
+                                              marca, sus productos, servicios o proyecto.
+
+                                              Apertura del canal dedicado WhatsApp Business
+                                              Conexión con desarrollador API
+                                              Verificación de canal con Facebook
+                                              Elaboración de calendario editorial de contenidos
+                                              Diseño de contenidos
+                                              Consultoría digital sobre la plataforma.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Diseño de blog
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 50,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="50000"
+                                              data-nombre="Diseño de blog" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Benchmarking de blogs de la competencia.
+                                              Construcción de concepto editorial.
+                                              Evaluación de diseño de plataforma.
+                                              Diseño de calendario de temas.
+                                              Parrilla mensual de contenidos.
+                                              Construcción general de contenidos creativos en base a materiales
+                                              proporcionados por el cliente.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+
+
+                      <tr data-widget="expandable-table" aria-expanded="false">
+                        <td>
+                          <i class="fas fa-caret-right fa-fw"></i>
+                          Academy
+                        </td>
+                      </tr>
+                      <tr class="expandable-body">
+                        <td>
+                          <div class="p-0">
+                            <table class="table table-hover">
+                              <tbody>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Talleres varios no enlistados
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                             value="Costo 180,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                              name="input-cantidad-tacticas" data-costo="180000"
+                                              data-nombre="Talleres varios no enlistados" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Diseño de taller a la medida en función de las necesidades del cliente
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Media training
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo 180,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="180000"
+                                                   data-nombre="Media training" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>3 horas de coaching intensivo con ejercicios prácticos y teoría con un
+                                              periodista de la fuente de negocios.
+
+                                              Ejercicios:
+                                              Simulación de televisión.
+                                              Entrevista uno a uno.
+                                              Entrevista de radio.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Crisis training
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo 180,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="180000"
+                                                   data-nombre="Crisis training" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>3 horas de entrenamiento intensivo con teoría y un ejercicio que emula
+                                              una situación real de crisis:
+
+                                              Periodista de la fuente adhoc a la marca y el tema de crisis
+                                              Simulación de televisión.
+                                              Entrevista uno a uno.
+                                              Rueda de prensa.
+                                              Entrevista de radio.
+                                              Entrevista de banqueta.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Public speaking training
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo 180,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="180000"
+                                                   data-nombre="Public speaking training" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>2 horas de entrenamiento intensivo con teoría y ejercicios:
+
+                                              Uso de técnicas para mostrar seguridad y dominio verbal y no verbal.
+                                              Aplicar técnicas de respiración para controlar nerviosismo y mejorar
+                                              acentuación.
+                                              Aprender a utilizar la voz y a mejorar la dicción.
+                                              Manejo correcto de los axiomas y del manejo de su propia imagen pública.
+                                              Comprender a convertir una idea en una buena historia. </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+
+
+                      <tr data-widget="expandable-table" aria-expanded="false">
+                        <td>
+                          <i class="fas fa-caret-right fa-fw"></i>
+                          Multimedia
+                        </td>
+                      </tr>
+                      <tr class="expandable-body">
+                        <td>
+                          <div class="p-0">
+                            <table class="table table-hover">
+                              <tbody>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Video para eventos
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo 25,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="25000"
+                                                   data-nombre="Video para eventos" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>1 cámara
+                                              5 hrs. por evento
+                                              Entrega de material digital RAW sin corrección de color ni retoques</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Levantamiento de video testimonial
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo 25,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="25000"
+                                                   data-nombre="Levantamiento de video testimonial" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Básico
+                                              1 persona
+                                              1 cámara
+                                              Scouting
+                                              1 locación
+                                              2 hrs. de levantamiento
+                                              Animación básica (supers y look and feel)</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Edición de video
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $15,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="15000"
+                                                   data-nombre="Edición de video" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Motion graphics y videos, edición básica por minuto.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Levantamiento fotográfico y shootings
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $20,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="20000"
+                                                   data-nombre="Levantamiento fotográfico y shootings" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>5 hrs. por evento
+                                              Entrega de material digital RAW, sin corrección de color, ni retoques</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Fotografía corporativa
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $20,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="20000"
+                                                   data-nombre="Fotografía corporativa" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Sesión fotográfica para ejecutivos
+                                              Scouting previo
+                                              1 locación
+                                              Aprox. 1:30 hrs. por persona
+                                              Corrección de color
+                                              Retoque fotográfico
+                                              Entrega de imágenes en dispositivo electrónico (usb) o link</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+
+
+                      <tr data-widget="expandable-table" aria-expanded="false">
+                        <td>
+                          <i class="fas fa-caret-right fa-fw"></i>
+                          Branding
+                        </td>
+                      </tr>
+                      <tr class="expandable-body">
+                        <td>
+                          <div class="p-0">
+                            <table class="table table-hover">
+                              <tbody>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Branding e identidad gráfica corporativa
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $400,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="400000"
+                                                   data-nombre="Branding e identidad gráfica corporativa" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Logo:
+                                              Diseño de isotipos
+                                              Diseño tipográfico
+                                              Conjunción de imagotipo o isologo
+                                              Paleta de colores
+                                              Elementos graficos look and feel
+                                              Guía de identidad corporativa PDF digital
+                                              Usos y aplicaciones básicas</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Naming de marca
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $80,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="80000"
+                                                   data-nombre="Naming de marca" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Mapeo de nombres existentes en la industria y la categoría.
+                                              Generación de concepto
+                                              Bajada de keywords, nubes de palabras y mapas mentales
+                                              Brainstorming creativo
+                                              Selección de mejores nombres
+                                              Justificación narrativa</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Diseño editorial
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $0,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="0000"
+                                                   data-nombre="Diseño editorial" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Elaboración de revistas o libros
+                                              Proyectos taylor made</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Impresión
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $0,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="0000"
+                                                   data-nombre="Impresión" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Cotización de acuerdo a:
+                                              Medidas
+                                              Tiraje
+                                              Papel
+                                              Acabados
+                                              Entrega</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Arquitectura de marca
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $500,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="500000"
+                                                   data-nombre="Arquitectura de marca" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Coaching inicial
+                                              Atributos y beneficios básicos
+                                              Beneficio funcional
+                                              Equity de marca
+                                              Promesa de marca
+                                              Diferencial
+                                              Posicionamiento
+                                              Insights
+                                              Aporte emocional
+                                              Why / how / what
+                                              RTB
+                                              Personalidad de marca
+                                              ADN</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr data-widget="expandable-table" aria-expanded="false">
+                        <td>
+                          <i class="fas fa-caret-right fa-fw"></i>
+                          Crisis
+                        </td>
+                      </tr>
+                      <tr class="expandable-body">
+                        <td>
+                          <div class="p-0">
+                            <table class="table table-hover">
+                              <tbody>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Manejo de crisis mediática
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $250,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="250000"
+                                                   data-nombre="Manejo de crisis mediática" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Identificación y análisis de crisis
+                                              Comité de manejo de crisis
+                                              Think tank
+                                              War room
+                                              Documentación estratégica
+                                              Comunicados especiales
+                                              Posturas y escenarios
+                                              Analisis de la coyuntura
+                                              Blindaje de la comunicación digital
+                                              Elaboracipon de materiales especiales
+                                              Consultoría 360°</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Comité de comunicación y prevención
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $120,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="120000"
+                                                   data-nombre="Comité de comunicación y prevención" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Unificar y optimizar las comunicaciones de la institución, discutiendo
+                                              temas relevantes y buscando la protección del organismo en todo momento.
+
+                                              Alinear la comunicación interna y externa.
+
+                                              Unificar criterios de equipo para que se comunique bajo las mismas pautas
+                                              para alcanzar el resultado esperado y mantener la percepción de la marca
+                                              en alto.
+
+                                              Integrar a todos los departamentos, creando un equipo humano con mejor
+                                              comunicación comprometida y preocupada por el desarrollo.
+
+                                              Resolver situaciones de comunicación desde la perspectiva de los
+                                              diferentes departamentos, dando más credibilidad a la compañía.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+
+
+                      <tr data-widget="expandable-table" aria-expanded="false">
+                        <td>
+                          <i class="fas fa-caret-right fa-fw"></i>
+                          Investigación
+                        </td>
+                      </tr>
+                      <tr class="expandable-body">
+                        <td>
+                          <div class="p-0">
+                            <table class="table table-hover">
+                              <tbody>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Benchmarks de competencia
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $110,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="110000"
+                                                   data-nombre="Benchmarks de competencia" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Análisis cuantitativo / cualitativo por competidor:
+                                              Número de notas.
+                                              Tinta no pagada.
+                                              Mapeo de medios por tier.
+                                              Tendencia de la información.
+                                              Medición estratégica: Ubicación de notas, relevancia, categoría, líderes
+                                              de opinión y titulares generados.
+                                              Conclusiones estratégicas: Temas en tendencia, categorías, estudios,
+                                              productos y servicios más posicionados; alianzas estratégicas y anuncios
+                                              de nuevo negocio.
+                                              Recomendaciones orientadas a comunicación y PR.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Estudios de mercado corto alcance
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $450,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="450000"
+                                                   data-nombre="Estudios de mercado corto alcance" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>1 plaza
+                                              120 encuestas</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Estudios de mercado medio alcance
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $650,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="650000"
+                                                   data-nombre="Estudios de mercado medio alcance" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>2 plaza
+                                              150 encuestas
+                                              4 etnoramas</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Estudios de mercado largo alcance
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $0,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="0000"
+                                                   data-nombre="Estudios de mercado largo alcance" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Taylor made</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Monitoreo de medios o SCAN
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $35,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="35000"
+                                                   data-nombre="Monitoreo de medios o SCAN" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>La plataforma incluye:
+                                              Notas de marca
+                                              Monitoreo del mercado y la competencia
+                                              Alertas coyunturales
+                                              Consultoría estratégica de comunicación
+                                              Eventos especiales puntuales
+
+                                              Delivery:
+                                              Newsletter responsivo 8:00 am
+                                              Plataforma online con alertas
+                                              Análisis y estrategia a partir de notas</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    M.A.P.
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $65,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="65000"
+                                                   data-nombre="M.A.P." placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Analisis de la Visibilidad, Reputación, Empatía:
+                                              Valoración de la audiencia
+                                              Percepción de decision makers
+                                              Referencia social media
+                                              Percepción de KOL´s
+                                              14 P´s del marketing.</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Business and media intelligence
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $65,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="65000"
+                                                   data-nombre="Business and media intelligence" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Convertir datos en insights accionables
+                                              Monitoreo de medios de comunicación a nivel nacional
+                                              Monitoreo de redes sociales: perfiles de medios y stakeholders
+                                              Portal de generación de reportes y gestión de publicaciones
+                                              Medición cuantitativa por nota: ROI, alcance, impacto, trascendencia.
+                                              Medición cualitativa: IOR, continuidad, círculos de influencia.
+                                              Matriz integral de Inteligencia: Análisis de presencia mediática mensual,
+                                              Mapa de reputación semestral
+                                              Pop-up Think Tank: Alertas informativas proactivas, White Papers
+                                              coyunturales, Análisis de tendencias</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+
+
+                      <tr data-widget="expandable-table" aria-expanded="false">
+                        <td>
+                          <i class="fas fa-caret-right fa-fw"></i>
+                          Internal Comms
+                        </td>
+                      </tr>
+                      <tr class="expandable-body">
+                        <td>
+                          <div class="p-0">
+                            <table class="table table-hover">
+                              <tbody>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Comunicación interna
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $130,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="130000"
+                                                   data-nombre="Comunicación interna" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Comité de comunicación
+                                              Diagnóstico de comunicación interna
+                                              Documentación estratégica
+                                              Elaboración de planes de campañas
+                                              Planeación de medios internos</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+
+
+                      <tr data-widget="expandable-table" aria-expanded="false">
+                        <td>
+                          <i class="fas fa-caret-right fa-fw"></i>
+                          Asuntos Públicos
+                        </td>
+                      </tr>
+                      <tr class="expandable-body">
+                        <td>
+                          <div class="p-0">
+                            <table class="table table-hover">
+                              <tbody>
+                                <tr data-widget="expandable-table" aria-expanded="false">
+                                  <td>
+                                    <i class="fas fa-caret-right fa-fw"></i>
+                                    Asuntos públicos, servicios básicos
+                                    <form>
+                                      <div class="form-row align-items-center">
+                                        <div class="col-sm-3 my-1">
+                                          <input type="text" readonly class="form-control-plaintext"
+                                                 value="Costo $180,000">
+                                        </div>
+                                        <div class="col-sm-3 my-1">
+                                          <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Cantidad</div>
+                                            </div>
+                                            <input type="number" min=0 class="form-control"
+                                                   name="input-cantidad-tacticas" data-costo="180000"
+                                                   data-nombre="Asuntos públicos, servicios básicos" placeholder="">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </td>
+                                </tr>
+                                <tr class="expandable-body">
+                                  <td>
+                                    <div class="p-0">
+                                      <table class="table table-hover">
+                                        <tbody>
+                                          <tr>
+                                            <td>Formación de Think Tank para AP's
+                                              Formación de War Room para AP's
+                                              Coordinación de comité de asuntos públicos
+                                              Relación con gobiernos
+                                              Relación con cámaras de Diputados o Senadores
+                                              Relación con comisiones
+                                              Relación con partidos políticos
+                                              Relación con organizaciones de la sociedad civil
+                                              Análisis legislativos
+                                              Análisis e investigación de coyunturas
+                                              Mapa de perfiles clave
+                                              Establecimiento de políticas públicas
+                                              Advocacy</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </td>
+                      </tr>
+
+
+
+
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
+  <script type="text/javascript" src="build/js/firebase.js"></script>
+  <!-- jQuery -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- DataTables  & Plugins -->
+  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="plugins/jszip/jszip.min.js"></script>
+  <script src="plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="dist/js/demo.js"></script>
+  <script type="text/javascript" src="build/js/driveApi.js"></script>
+  <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+</body>
+
+</html>
