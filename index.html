@@ -159,6 +159,7 @@
               <!-- /.card -->
             </div>
             <div class="col-4">
+
               <!-- /.card -->
 
               <div class="card">
@@ -181,23 +182,35 @@
                       <p><strong>Tácticas</strong></p>
                       <div class="container-fluid" id="div-tacticas"></div>
                       <button id="boton-editar" hidden="true" type="submit" class="btn btn-outline-info">Editar</button>
+                    </div>
                   </form>
                   <a id="boton-descargar" download class="btn btn-outline-success">Descargar</a>
-                  <div class="card-footer text-muted">
-                    <div hidden id="div-crear-estrategia">
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+              <!-- /.card -->
+
+              <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <h5 class="card-title">Creador de parámetros</h5>
+                  <br/>
+                    <div hidden class="mt-  3" id="div-crear-estrategia">
                       <form class="form-inline" onsubmit="crearEstrategia()">
                         <div class="form-group">
                           <label for="inputNuevaEstrategia" class="sr-only">Estrategia</label>
                           <input type="text" class="form-control" id="inputNuevaEstrategia" placeholder="Estrategia">
                           <button id="boton-crear-estrategia" type="submit" class="btn btn-primary">Crear</button>
+                        </div>
                       </form>
-                    </div>
                     <div hidden id="div-crear-tactica" class="mt-2">
                       <form class="form-inline" onsubmit="crearTactica()">
                         <div class="form-group">
                           <label for="inputNuevaTactica" class="sr-only">Táctica</label>
                           <input type="text" class="form-control" id="inputNuevaTactica" placeholder="Táctica">
                           <button id="boton-crear-tactica" type="submit" class="btn btn-primary">Crear</button>
+                        </div>
                       </form>
                     </div>
                   </div>
@@ -210,7 +223,6 @@
           <!-- /.col -->
         </div>
         <!-- /.row -->
-    </div>
     <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
