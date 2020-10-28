@@ -2,10 +2,8 @@ var propuestaSeleccionada = "";
 const listaArchivos = [];
 
 const tablaResultados = document.getElementById('cuerpo-tabla');
-const divEstrategias = document.getElementById('div-estrategias');
 const divCrearEstrategias = document.getElementById('div-crear-estrategia');
 const divCrearTacticas = document.getElementById('div-crear-tactica');
-const divTacticas = document.getElementById('div-tacticas');
 const botonEditar = document.getElementById('boton-editar');
 const botonDescargar = document.getElementById('boton-descargar');
 const inputNuevaEstrategia = document.getElementById('inputNuevaEstrategia');
@@ -16,9 +14,8 @@ const inputMonto = document.getElementById('input-monto');
  */
 
 window.onload = actualizarFormulario();
+
 function actualizarFormulario() {
-    conseguirEstrategias();
-    conseguirTacticas();
 }
 
 function handleClientLoadLogin() {
@@ -42,6 +39,7 @@ function initClient() {
         alert("error", error);
     });
 }
+
 /**
  *  Called when the signed in status changes, to update the UI
  *  appropriately. After a sign-in, the API is called.
@@ -59,6 +57,9 @@ function transferir() {
 
 function actualizarUIBuscador() {
     actualizarUILogged();
+
+    conseguirSector("estrategias");
+    conseguirSector("tacticas");
     crearListaDePadres("");
     if (esAdmin())
         actualizarUIAdmin();
@@ -104,10 +105,9 @@ function crearListaDePadres(token) {
             crearListaDePadres(nToken);
             queryPadres = "";
             listaDeIdDeCarpetasPadre = [];
-        }
-
-        else {
+        } else {
             configurarTabla();
+            $('#loading').hide();
         }
     });
 }
@@ -148,8 +148,7 @@ function listFiles(queryPadres) {
             files.forEach(function (file, i) {
                 listaArchivos.push(file);
             });
-        }
-        else $('.toast').toast('show');
+        } else $('.toast').toast('show');
     });
 }
 
@@ -157,7 +156,7 @@ function configurarTabla() {
     listaArchivos.forEach(archivo => tablaResultados.appendChild(crearHilera(archivo)));
     $("#example1").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        "buttons": ["excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 }
 
@@ -212,16 +211,12 @@ function conseguirDetallesDePropuesta() {
     });
 }
 
-function limpiarFormulario() {
-    limpiarCheckBox("estrategias");
-    limpiarCheckBox("tacticas");
-}
-
 function limpiarFormulario(clave) {
     $("#div-" + clave + " input[type=checkbox]").each(function () {
         $(this).prop("checked", false);
     });
 }
+
 function checarBoxes(clave) {
     let temp = [];
     let query = firebase.database().ref("propuestas/" + propuestaSeleccionada + "/" + clave);
@@ -244,56 +239,58 @@ function checarBoxes(clave) {
     });
 }
 
-function conseguirEstrategias() {
-    let query = firebase.database().ref("estrategias");
-    query.on("value", function (snapshot) {
+function conseguirSector(sector) {
+    let query = firebase.database().ref(sector);
+    query.once("value", function (snapshot) {
         if (snapshot.empty)
             return;
         snapshot.forEach(function (childSnapshot) {
-            let childData = childSnapshot.val();
+            let nombre = childSnapshot.val().nombre;
             let div = document.createElement("div");
+            let input = crearElementoInput(nombre);
+            let label = crearElementoLabel(nombre);
+            let boton = crearBotonEliminar(sector, nombre);
             div.classList.add("form-check");
-            let input = document.createElement("input");
-            input.classList.add("form-check-input");
-            input.type = "checkbox";
-            input.id = "checkboxEstrategia" + childData.nombre.replace(' ', '');
-            input.value = childData.nombre;
-            input.disabled = !esAdmin();
-            let label = document.createElement("label");
-            label.setAttribute("for", childData.nombre.replace(' ', ''));
-            label.innerText = childData.nombre;
             div.appendChild(input);
             div.appendChild(label);
-            divEstrategias.appendChild(div);
+            div.appendChild(boton);
+            let divSector = document.getElementById('div-' + sector);
+            divSector.appendChild(div);
         });
     }, function (error) {
     });
 }
 
-function conseguirTacticas() {
-    let query = firebase.database().ref("tacticas");
-    query.on("value", function (snapshot) {
-        if (snapshot.empty)
-            return;
-        snapshot.forEach(function (childSnapshot) {
-            let childData = childSnapshot.val();
-            let div = document.createElement("div");
-            div.classList.add("form-check");
-            let input = document.createElement("input");
-            input.classList.add("form-check-input");
-            input.type = "checkbox";
-            input.id = "checkboxTactica" + childData.nombre.replace(' ', '');
-            input.value = childData.nombre;
-            input.disabled = !esAdmin();
-            let label = document.createElement("label");
-            label.setAttribute("for", childData.nombre.replace(' ', ''));
-            label.innerText = childData.nombre;
-            div.appendChild(input);
-            div.appendChild(label);
-            divTacticas.appendChild(div);
-        });
-    }, function (error) {
-    });
+function crearElementoInput(nombre) {
+    let input = document.createElement("input");
+    input.classList.add("form-check-input");
+    input.type = "checkbox";
+    input.value = nombre;
+    input.disabled = !esAdmin();
+    return input;
+}
+
+function crearElementoLabel(nombre) {
+    let label = document.createElement("label");
+    label.setAttribute("for", nombre.replace(' ', ''));
+    label.innerText = nombre;
+    return label;
+}
+
+function crearBotonEliminar(sector, nombre) {
+    let boton = document.createElement("button");
+    let icono = document.createElement("i");
+    icono.classList.add("fas");
+    icono.classList.add("fa-minus");
+    boton.classList.add("btn");
+    boton.classList.add("btn-danger");
+    boton.classList.add("btn-sm");
+    boton.onclick = function () {
+        firebase.database().ref(sector + '/' + nombre).remove();
+    }
+    boton.appendChild(icono);
+    boton.hidden = !esAdmin();
+    return boton;
 }
 
 function crearEstrategia() {
@@ -307,8 +304,8 @@ function crearEstrategia() {
 }
 
 function editarPropuesta() {
-    let estrategias = checkboxAListaEstrategias();
-    let tacticas = checkboxAListaTacticas();
+    let estrategias = checkboxAListaSector("estrategias");
+    let tacticas = checkboxAListaSector("tacticas");
     let monto = inputMonto.value;
     firebase.database().ref('propuestas/' + propuestaSeleccionada).set({
         nombre: propuestaSeleccionada,
@@ -321,17 +318,9 @@ function editarPropuesta() {
     });
 }
 
-function checkboxAListaTacticas() {
+function checkboxAListaSector(sector) {
     let temp = []
-    $("#div-tacticas input[type=checkbox]").each(function () {
-        if ($(this).is(':checked'))
-            temp.push($(this).val());
-    });
-    return temp;
-}
-function checkboxAListaEstrategias() {
-    let temp = []
-    $("#div-estrategias input[type=checkbox]").each(function () {
+    $("#div-" + sector + " input[type=checkbox]").each(function () {
         if ($(this).is(':checked'))
             temp.push($(this).val());
     });
@@ -347,6 +336,7 @@ function crearTactica() {
             console.log(error);
     });
 }
+
 function editarSeleccionado() {
     let row = $(".selected").removeClass("selected");
 }
