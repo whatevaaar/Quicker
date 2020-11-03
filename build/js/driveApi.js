@@ -12,7 +12,6 @@ const SCOPES = 'https://www.googleapis.com/auth/drive';
 
 const signoutButton = document.getElementById('boton-signout');
 const nombrePerfil = document.getElementById('nombre-perfil');
-const imgPerfil = document.getElementById('img-perfil');
 
 /**
  *  On load, called to load the auth2 library and API client library.
@@ -58,7 +57,6 @@ function updateSigninStatus(isSignedIn) {
 function actualizarUILogged(resp) {
     var auth2 = gapi.auth2.getAuthInstance();
     var profile = auth2.currentUser.get().getBasicProfile();
-    imgPerfil.src = profile.getImageUrl();
     nombrePerfil.innerText = profile.getName();
 }
 

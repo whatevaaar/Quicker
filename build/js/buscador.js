@@ -2,8 +2,6 @@ var propuestaSeleccionada = "";
 const listaArchivos = [];
 
 const tablaResultados = document.getElementById('cuerpo-tabla');
-const divCrearEstrategias = document.getElementById('div-crear-estrategia');
-const divCrearTacticas = document.getElementById('div-crear-tactica');
 const botonEditar = document.getElementById('boton-editar');
 const botonDescargar = document.getElementById('boton-descargar');
 const inputNuevaEstrategia = document.getElementById('inputNuevaEstrategia');
@@ -260,7 +258,6 @@ function conseguirSector(sector) {
     }, function (error) {
     });
 }
-
 function crearElementoInput(nombre) {
     let input = document.createElement("input");
     input.classList.add("form-check-input");
