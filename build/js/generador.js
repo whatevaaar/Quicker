@@ -74,7 +74,18 @@ function generar() {
 }
 
 function crearPdf() {
+    var imgToExport = document.getElementById('logo-extrategia');
+    var canvas = document.createElement('canvas');
+    canvas.width = imgToExport.width;
+    canvas.height = imgToExport.height;
+    canvas.getContext('2d').drawImage(imgToExport, 0, 0);
+    let url = canvas.toDataURL('image/png');
     var docDefinition = {
+        header: {
+                    // usually you would use a dataUri instead of the name for client-side printing
+                    // sampleImage.jpg however works inside playground so you can play with it
+                    image: url,
+        },
         content: [
             {
                 layout: 'lightHorizontalLines', // optional
