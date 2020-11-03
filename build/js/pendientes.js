@@ -1,22 +1,12 @@
-const listaDeDetonantes = []
-window.onload = conseguirDetonantes();
+const listaDeDetonantesAceptado = ["Recuperación", "Inmediatez", "Seguimiento", "Urgencia o crisis", "Estrategia", "Costo", "El cliente llegó por las redes sociales",
+    "El cliente llegó por el sitio web", "El cliente forma parte del comité de especialistas", "El cliente trabajó en la agencia en algún momento", "El cliente viene por referencia de un ejecutivo de la agencia",
+    "El cliente viene por relación de Carlos Herrero", "El cliente escucho de nosotros en un ranking", "El cliente viene referenciado por otro cliente", "El cliente ya había sido nuestro cliente anteriormente"];
+const listaDeDetonantesRechazado = ["Recuperación", "Inmediatez", "Seguimiento", "Urgencia o crisis", "Estrategia", "Costo", "Declinamos avanzar", "Pobre propuesta", "Se canceló", "Se percibe que está arreglado", "El equipo de comunicación es muy Jr",
+    "Generamos poco valor agregado", "Falta de especialización de Extrategia", "Poca claridad del cliente", "Mejor propuesta de la competencia", "COVID"];
+window.onload = conseguirPropuestas();
 
 const tablaResultados = document.getElementById('cuerpo-tabla');
 const inputNuevoDetonante = document.getElementById('inputNuevoDetonante');
-
-function conseguirDetonantes() {
-    let query = firebase.database().ref("detonantes");
-    query.on("value", function (snapshot) {
-        if (snapshot.empty)
-            return;
-        snapshot.forEach(function (childSnapshot) {
-            let childData = childSnapshot.val();
-            listaDeDetonantes.push(childData.nombre);
-        });
-        conseguirPropuestas();
-    }, function (error) {
-    });
-}
 
 function conseguirPropuestas() {
     let query = firebase.database().ref("propuestas");
@@ -32,15 +22,6 @@ function conseguirPropuestas() {
     }, function (error) {
     });
 }
-function crearDetonante() {
-    let detonante = inputNuevoDetonante.value;
-    firebase.database().ref('detonantes/' + detonante).set({
-        nombre: detonante,
-    }, function (error) {
-        if (error)
-            console.log(error);
-    });
-}
 
 function crearHilera(archivo) {
     let hilera = document.createElement('tr');
@@ -53,20 +34,8 @@ function crearHilera(archivo) {
     columnaEstado.append(crearRadiosEstado("Rechazado", archivo.nombre));
     columnaEstado.append(crearRadiosEstado("Proceso", archivo.nombre));
 
-    let selectDetonante = document.createElement('select');
-    selectDetonante.name = 'select-' + archivo.nombre;
-    selectDetonante.id = 'select-' + archivo.nombre;
-    selectDetonante.classList.add("form-control");
-    listaDeDetonantes.forEach(function (detonante) {
-        let opcion = document.createElement('option');
-        opcion.innerText = detonante;
-        opcion.value = detonante;
-        selectDetonante.appendChild(opcion);
-    });
-    selectDetonante.onchange = function () {
-        actualizarPropuesta(archivo.nombre);
-    };
-    columnaDetonante.appendChild(selectDetonante);
+    columnaDetonante.appendChild(crearSelectbox("Aceptado", archivo.nombre));
+    columnaDetonante.appendChild(crearSelectbox("Rechazado", archivo.nombre));
     columnaCliente.innerText = regresarNombreDeCliente(archivo.nombre);
     columnaPropuesta.innerText = regresarPropuesta(archivo.nombre);
     columnaFecha.innerText = regresarFecha(archivo.nombre);
@@ -84,6 +53,25 @@ function crearHilera(archivo) {
     return hilera;
 }
 
+function crearSelectbox(clave, nombre) {
+    let selectDetonante = document.createElement('select');
+    selectDetonante.name = 'select-' + clave + '-' + nombre;
+    selectDetonante.id = 'select-' + clave + '-' + nombre;
+    selectDetonante.classList.add("form-control");
+    let listaDeDetonantes = "Aceptado" === clave ? listaDeDetonantesAceptado: listaDeDetonantesRechazado;
+    listaDeDetonantes.forEach(function (detonante) {
+        let opcion = document.createElement('option');
+        opcion.innerText = detonante;
+        opcion.value = detonante;
+        selectDetonante.appendChild(opcion);
+    });
+    selectDetonante.onchange = function () {
+        actualizarPropuesta(archivo.nombre);
+    };
+    return selectDetonante;
+}
+
+
 function actualizarDatosHilera(nombre) {
     let query = firebase.database().ref("propuestas/" + nombre);
     query.on("value", function (snapshot) {
@@ -100,7 +88,7 @@ function actualizarDatosHilera(nombre) {
 
 function actualizarPropuesta(nombre) {
     let radioEstado = $('input[name="radio-estado-' + nombre + '"]:checked').val();
-    let checkboxDetonante = $('select[name="select-' + nombre + '"] option').filter(':selected').val();
+    let checkboxDetonante = $('select[name="select-' + radioEstado + '-' + nombre + '"] option').filter(':selected').val();
     let updates = {};
     updates['/propuestas/' + nombre + '/detonante'] = checkboxDetonante;
     updates['/propuestas/' + nombre + '/estado'] = radioEstado;
@@ -119,7 +107,7 @@ function crearRadiosEstado(clave, nombre) {
     label.setAttribute("for", input.id);
     label.innerText = clave;
     input.addEventListener('change', function () {
-        actualizarPropuesta(nombre);
+        //actualizarPropuesta(nombre);
     });
     div.appendChild(input);
     div.appendChild(label);
