@@ -58,7 +58,7 @@ function crearSelectbox(clave, nombre) {
     selectDetonante.name = 'select-' + clave + '-' + nombre;
     selectDetonante.id = 'select-' + clave + '-' + nombre;
     selectDetonante.classList.add("form-control");
-    let listaDeDetonantes = "Aceptado" === clave ? listaDeDetonantesAceptado: listaDeDetonantesRechazado;
+    let listaDeDetonantes = "Aceptado" === clave ? listaDeDetonantesAceptado : listaDeDetonantesRechazado;
     listaDeDetonantes.forEach(function (detonante) {
         let opcion = document.createElement('option');
         opcion.innerText = detonante;
@@ -66,7 +66,7 @@ function crearSelectbox(clave, nombre) {
         selectDetonante.appendChild(opcion);
     });
     selectDetonante.onchange = function () {
-        actualizarPropuesta(archivo.nombre);
+        actualizarPropuesta(nombre);
     };
     return selectDetonante;
 }
@@ -79,7 +79,9 @@ function actualizarDatosHilera(nombre) {
             return;
         let propuesta = snapshot.val();
         $('#radio-estado-' + propuesta.estado + '-' + nombre).prop("checked", true);
-        $('#select-' + nombre).val(propuesta.detonante);
+        $('#select-' + propuesta.estado + '-' + nombre).val(propuesta.detonante);
+        document.getElementById("select-Aceptado" + '-' + nombre).hidden = propuesta.estado === "Rechazado";
+        document.getElementById("select-Rechazado" + '-' + nombre).hidden = propuesta.estado === "Aceptado";
 
     }, function (error) {
     });
@@ -92,7 +94,8 @@ function actualizarPropuesta(nombre) {
     let updates = {};
     updates['/propuestas/' + nombre + '/detonante'] = checkboxDetonante;
     updates['/propuestas/' + nombre + '/estado'] = radioEstado;
-    return firebase.database().ref().update(updates);
+    firebase.database().ref().update(updates);
+    location.reload(true);
 }
 
 function crearRadiosEstado(clave, nombre) {
@@ -107,7 +110,7 @@ function crearRadiosEstado(clave, nombre) {
     label.setAttribute("for", input.id);
     label.innerText = clave;
     input.addEventListener('change', function () {
-        //actualizarPropuesta(nombre);
+        actualizarPropuesta(nombre);
     });
     div.appendChild(input);
     div.appendChild(label);
