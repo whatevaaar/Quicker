@@ -55,9 +55,6 @@ function transferir() {
 
 function actualizarUIBuscador() {
     actualizarUILogged();
-
-    conseguirSector("estrategias");
-    conseguirSector("tacticas");
     crearListaDePadres("");
     if (esAdmin())
         actualizarUIAdmin();
@@ -194,8 +191,8 @@ function crearHilera(archivo) {
 }
 
 function conseguirDetallesDePropuesta() {
-    checarBoxes("estrategias");
-    checarBoxes("tacticas");
+    checarBoxesDeEstrategias();
+    establecerSelectedDeTacticas();
     let query = firebase.database().ref("propuestas/" + propuestaSeleccionada);
     query.on("value", function (snapshot) {
         if (!snapshot.exists()) {
@@ -209,25 +206,45 @@ function conseguirDetallesDePropuesta() {
     });
 }
 
-function limpiarFormulario(clave) {
-    $("#div-" + clave + " input[type=checkbox]").each(function () {
-        $(this).prop("checked", false);
-    });
-}
-
-function checarBoxes(clave) {
+function establecerSelectedDeTacticas() {
+    $('#select-tacticas').tokenize2().trigger('tokenize:clear');
     let temp = [];
-    let query = firebase.database().ref("propuestas/" + propuestaSeleccionada + "/" + clave);
+    let query = firebase.database().ref("propuestas/" + propuestaSeleccionada + "/tacticas");
     query.on("value", function (snapshot) {
         if (snapshot.empty)
             return;
         snapshot.forEach(function (childSnapshot) {
             let childData = childSnapshot.val();
             temp.push(childData);
-            console.log(childData);
         });
-        $("#div-" + clave + " input[type=checkbox]").each(function () {
-            if (temp.indexOf($(this).val()) != -1)
+        $("#select-tacticas > option").each(function () {
+            if (temp.indexOf($(this).val()) !== -1)
+                $(this).prop("selected", "selected");
+        });
+
+        $('.demo').tokenize2().trigger('tokenize:remap');
+    }, function (error) {
+    });
+}
+
+function limpiarFormulario(clave) {
+    $("#div-" + clave + " input[type=checkbox]").each(function () {
+        $(this).prop("checked", false);
+    });
+}
+
+function checarBoxesDeEstrategias() {
+    let temp = [];
+    let query = firebase.database().ref("propuestas/" + propuestaSeleccionada + "/estrategias");
+    query.on("value", function (snapshot) {
+        if (snapshot.empty)
+            return;
+        snapshot.forEach(function (childSnapshot) {
+            let childData = childSnapshot.val();
+            temp.push(childData);
+        });
+        $("#div-estrategias input[type=checkbox]").each(function () {
+            if (temp.indexOf($(this).val()) !== -1)
                 $(this).prop("checked", true);
             else
                 $(this).prop("checked", false);
@@ -237,27 +254,6 @@ function checarBoxes(clave) {
     });
 }
 
-function conseguirSector(sector) {
-    let query = firebase.database().ref(sector);
-    query.once("value", function (snapshot) {
-        if (snapshot.empty)
-            return;
-        snapshot.forEach(function (childSnapshot) {
-            let nombre = childSnapshot.val().nombre;
-            let div = document.createElement("div");
-            let input = crearElementoInput(nombre);
-            let label = crearElementoLabel(nombre);
-            let boton = crearBotonEliminar(sector, nombre);
-            div.classList.add("form-check");
-            div.appendChild(input);
-            div.appendChild(label);
-            div.appendChild(boton);
-            let divSector = document.getElementById('div-' + sector);
-            divSector.appendChild(div);
-        });
-    }, function (error) {
-    });
-}
 function crearElementoInput(nombre) {
     let input = document.createElement("input");
     input.classList.add("form-check-input");
@@ -300,9 +296,18 @@ function crearEstrategia() {
     });
 }
 
+function tacitcasSeleccionadasALista() {
+    let temp = []
+    $("#select-tacticas > option").each(function () {
+        if ($(this).is(':selected'))
+            temp.push($(this).val());
+    });
+    return temp;
+}
+
 function editarPropuesta() {
-    let estrategias = checkboxAListaSector("estrategias");
-    let tacticas = checkboxAListaSector("tacticas");
+    let estrategias = estrategiasSeleccionadasALista();
+    let tacticas = tacitcasSeleccionadasALista();
     let monto = inputMonto.value;
     firebase.database().ref('propuestas/' + propuestaSeleccionada).set({
         nombre: propuestaSeleccionada,
@@ -315,24 +320,15 @@ function editarPropuesta() {
     });
 }
 
-function checkboxAListaSector(sector) {
+function estrategiasSeleccionadasALista() {
     let temp = []
-    $("#div-" + sector + " input[type=checkbox]").each(function () {
+    $("#div-estrategias input[type=checkbox]").each(function () {
         if ($(this).is(':checked'))
             temp.push($(this).val());
     });
     return temp;
 }
 
-function crearTactica() {
-    let nombre = inputNuevaTactica.value;
-    firebase.database().ref('tacticas/' + nombre).set({
-        nombre: nombre,
-    }, function (error) {
-        if (error)
-            console.log(error);
-    });
-}
 
 function editarSeleccionado() {
     let row = $(".selected").removeClass("selected");
