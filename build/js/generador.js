@@ -11,7 +11,9 @@ function generarPropuesta() {
         let input = $(this);
         if (input && input.val() > 0) {
             tablaModal.appendChild(crearHilera(input));
-            bodyTablaPDF.push([input.attr('data-estrategia'), input.attr('data-nombre'), input.attr('data-costo'), input.val(), input.val() * input.attr('data-costo')]);
+            let costoConFormato = parseFloat(input.attr('data-costo')).toLocaleString();
+            let totalConFormato = (input.val() * input.attr('data-costo')).toLocaleString();
+            bodyTablaPDF.push([input.attr('data-estrategia'), input.attr('data-nombre'), costoConFormato, input.val(), totalConFormato]);
         }
     });
     $('#myModal').modal(show = true);
@@ -21,9 +23,10 @@ function generarPropuesta() {
 function actualizarTextoTotal() {
     let suma = 0;
     $('.columna-total').each(function () {
-        suma += Number($(this).html());
+        let valorEnColumna = parseFloat($(this).html().replace(/,/g, ''));
+        suma += valorEnColumna;
     });
-    parrafoTotal.innerText = 'Total $' + suma;
+    parrafoTotal.innerText = 'Total $' + suma.toLocaleString();
 }
 
 function crearCeldaEliminar(propuesta) {
@@ -52,9 +55,9 @@ function crearHilera(propuesta) {
 
     columnaEstrategia.innerText = propuesta.attr('data-estrategia');
     columnaTactica.innerText = propuesta.attr('data-nombre');
-    columnaCosto.innerText = propuesta.attr('data-costo');
+    columnaCosto.innerText = parseInt(propuesta.attr('data-costo')).toLocaleString();
     columnaCantidad.innerText = propuesta.val();
-    columnaTotal.innerText = propuesta.val() * propuesta.attr('data-costo');
+    columnaTotal.innerText = (propuesta.val() * propuesta.attr('data-costo')).toLocaleString();
     columnaTotal.classList.add('columna-total');
 
     hilera.appendChild(columnaEstrategia);
@@ -74,20 +77,30 @@ function generar() {
 }
 
 function crearPdf() {
-    var imgToExport = document.getElementById('logo-extrategia');
-    var canvas = document.createElement('canvas');
-    canvas.width = imgToExport.width;
-    canvas.height = imgToExport.height;
-    canvas.getContext('2d').drawImage(imgToExport, 0, 0);
-    let url = canvas.toDataURL('image/png');
+    let urlHeader = imgAUrl('img-header');
+    let urlFooter = imgAUrl('img-footer');
     var docDefinition = {
         header: {
                     // usually you would use a dataUri instead of the name for client-side printing
                     // sampleImage.jpg however works inside playground so you can play with it
-                    image: url,
+            image: urlHeader,
+            fit: [200, 300],
+            margin: [15, 15]
+        },
+        footer: {
+            image: urlFooter,
+            margin: [15, 0, 15],
+            fit: [200, 300]
         },
         content: [
             {
+                margin: [0, 35],
+                text: 'Propuesta de Comunicación',
+                style: 'header',
+                alignment: 'center'
+            },
+            {
+                margin: [15, 35, 15, 15],
                 layout: 'lightHorizontalLines', // optional
                 table: {
                     // headers are automatically repeated if the table spans over multiple pages
@@ -98,8 +111,24 @@ function crearPdf() {
                     body: bodyTablaPDF.slice()
                 }
             }
-        ]
+        ],
+        styles: {
+            header: {
+                fontSize: 18,
+                bold: true,
+                alignment: 'justify'
+            }
+        }
     };
 
     pdfMake.createPdf(docDefinition).download();
+}
+
+function imgAUrl(clave){
+    let imgToExport = document.getElementById(clave);
+    let canvas = document.createElement('canvas');
+    canvas.width = imgToExport.width;
+    canvas.height = imgToExport.height;
+    canvas.getContext('2d').drawImage(imgToExport, 0, 0);
+    return canvas.toDataURL('image/png');
 }
