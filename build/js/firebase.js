@@ -12,4 +12,33 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
+function regresarNombreDeCliente(nombre) {
+  let arr = nombre.split('-')
+  return arr[0].replaceAll('_', ' ');
+}
+
+function regresarIndustria(nombre) {
+  let arr = nombre.split('-')
+  if (!arr[1])
+    return "";
+  return arr[1].replaceAll('_', ' ');
+}
+
+function regresarProducto(nombre) {
+  let arr = nombre.split('-')
+  if (!arr[2])
+    return "";
+  return arr[2].replaceAll('_', ' ');
+}
+
+function regresarFecha(nombre) {
+  let arr = nombre.split('-')
+  if (!arr[3])
+    return "";
+  return arr[3].slice(0, arr[3].indexOf('.')).replaceAll('_', ' ');
+}
+
+function regresarNombreSinExtension(nombre) {
+  return nombre.slice(0, nombre.indexOf('.'));
+}
 
