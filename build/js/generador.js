@@ -1,3 +1,4 @@
+let sumaTotal = 0;
 const tablaModal = document.getElementById("tabla-modal");
 const parrafoTotal = document.getElementById("p-total");
 
@@ -26,6 +27,7 @@ function actualizarTextoTotal() {
         let valorEnColumna = parseFloat($(this).html().replace(/,/g, ''));
         suma += valorEnColumna;
     });
+    sumaTotal = suma;
     parrafoTotal.innerText = 'Total $' + suma.toLocaleString();
 }
 
@@ -110,6 +112,13 @@ function crearPdf() {
 
                     body: bodyTablaPDF.slice()
                 }
+            },
+            {
+
+                margin: [0, 35],
+                text: 'Total: $' + sumaTotal.toLocaleString(),
+                style: 'header',
+                alignment: 'center'
             }
         ],
         styles: {
