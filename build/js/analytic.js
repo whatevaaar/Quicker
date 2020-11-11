@@ -2,12 +2,13 @@ window.onload = obtenerDatos();
 
 let industriasConNumeroDeAceptacion = [];
 let clientesConNumeroDeAceptacion = [];
+let detonantesConNumeroDeAceptacion = [];
 
 function actualizarListaIndustria(industriaPropuesta, estado) {
     let resultado = industriasConNumeroDeAceptacion.find( ({ industria }) => industria === industriaPropuesta );
     if (resultado){
-        if (estado === "Aprobado")
-            resultado.aprobado += 1;
+        if (estado === "Aceptado")
+            resultado.aceptado += 1;
         else if(estado === "Rechazado")
             resultado.rechazado += 1;
         else if(estado === "Pendiente")
@@ -16,7 +17,7 @@ function actualizarListaIndustria(industriaPropuesta, estado) {
     else{
         industriasConNumeroDeAceptacion.push({
             industria: industriaPropuesta,
-            aprobado: estado === "Aprobado" ? 1: 0,
+            aceptado: estado === "Aceptado" ? 1: 0,
             rechazado: estado === "Rechazado" ? 1:0,
             pendiente: estado === "Pendiente" ? 1:0
         })
@@ -27,8 +28,8 @@ function actualizarListaIndustria(industriaPropuesta, estado) {
 function actualizarListaCliente(clientePropuesta, estado) {
     let resultado = clientesConNumeroDeAceptacion.find( ({ cliente }) => cliente === clientePropuesta );
     if (resultado){
-        if (estado === "Aprobado")
-            resultado.aprobado += 1;
+        if (estado === "Aceptado")
+            resultado.aceptado += 1;
         else if(estado === "Rechazado")
             resultado.rechazado += 1;
         else if(estado === "Pendiente")
@@ -37,9 +38,27 @@ function actualizarListaCliente(clientePropuesta, estado) {
     else{
         clientesConNumeroDeAceptacion.push({
             cliente: clientePropuesta,
-            aprobado: estado === "Aprobado" ? 1: 0,
+            aceptado: estado === "Aceptado" ? 1: 0,
             rechazado: estado === "Rechazado" ? 1:0,
             pendiente: estado === "Pendiente" ? 1:0
+        })
+    }
+
+}
+
+function actualizarListaDetonantes(detonantePropuesta, estado) {
+    let resultado = detonantesConNumeroDeAceptacion.find( ({ detonante }) => detonante === detonantePropuesta );
+    if (resultado){
+        if (estado === "Aceptado")
+            resultado.aceptado += 1;
+        else if(estado === "Rechazado")
+            resultado.rechazado += 1;
+    }
+    else{
+        detonantesConNumeroDeAceptacion.push({
+            detonante: detonantePropuesta,
+            aceptado: estado === "Aceptado" ? 1: 0,
+            rechazado: estado === "Rechazado" ? 1:0,
         })
     }
 
@@ -52,13 +71,14 @@ function obtenerDatos(){
             return;
         snapshot.forEach(function (childSnapshot) {
             let childData = childSnapshot.val();
-            if ( !childSnapshot.child('estado').exists() || !childSnapshot.child('estado').exists())
+            if ( !childSnapshot.child('estado').exists() || !childSnapshot.child('detonante').exists())
                 return;
             let cliente = regresarNombreDeCliente(childData.nombre);
             let industria = regresarIndustria(childData.nombre);
             let fecha = regresarFecha(childData.nombre);
             actualizarListaIndustria(industria, childData.estado);
             actualizarListaCliente(cliente, childData.estado);
+            actualizarListaDetonantes(childData.detonante, childData.estado);
         });
         generarGraficas();
     }, function (error) {
@@ -157,10 +177,10 @@ function generarGraficas() {
         // Get context with jQuery - using jQuery's .get() method.
         var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
         var donutData = {
-            labels:  industriasConNumeroDeAceptacion.map(i => i.industria),
+            labels:  detonantesConNumeroDeAceptacion.filter(i => i.aceptado > 0).map(i => i.detonante),
             datasets: [
                 {
-                    data:industriasConNumeroDeAceptacion.map(i => i.rechazado) ,
+                    data:detonantesConNumeroDeAceptacion.filter(i => i.aceptado > 0).map(i => i.aceptado) ,
                     backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
                 }
             ]
@@ -182,7 +202,15 @@ function generarGraficas() {
         //-------------
         // Get context with jQuery - using jQuery's .get() method.
         var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-        var pieData = donutData;
+        var pieData = {
+            labels:  industriasConNumeroDeAceptacion.map(i => i.industria),
+            datasets: [
+                {
+                    data:industriasConNumeroDeAceptacion.map(i => i.rechazado) ,
+                    backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                }
+            ]
+        };
         var pieOptions = {
             maintainAspectRatio: false,
             responsive: true,
@@ -199,11 +227,33 @@ function generarGraficas() {
         //- BAR CHART -
         //-------------
         var barChartCanvas = $('#barChart').get(0).getContext('2d')
-        var barChartData = $.extend(true, {}, areaChartData)
-        var temp0 = areaChartData.datasets[0]
-        var temp1 = areaChartData.datasets[1]
-        barChartData.datasets[0] = temp1
-        barChartData.datasets[1] = temp0
+        var barChartData = {
+            labels:  industriasConNumeroDeAceptacion.map(i => i.industria),
+            datasets: [
+                {
+                    label: 'Aceptado',
+                    backgroundColor: 'rgba(60,141,188,0.9)',
+                    borderColor: 'rgba(60,141,188,0.8)',
+                    pointRadius: false,
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(60,141,188,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data: industriasConNumeroDeAceptacion.map(i => i.aceptado)
+                },
+                {
+                    label: 'Rechazado',
+                    backgroundColor: 'rgba(210, 214, 222, 1)',
+                    borderColor: 'rgba(210, 214, 222, 1)',
+                    pointRadius: false,
+                    pointColor: 'rgba(210, 214, 222, 1)',
+                    pointStrokeColor: '#c1c7d1',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(220,220,220,1)',
+                    data: industriasConNumeroDeAceptacion.map(i => i.rechazado)
+                },
+            ]
+        }
 
         var barChartOptions = {
             responsive: true,
