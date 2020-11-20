@@ -7,6 +7,8 @@ const botonDescargar = document.getElementById('boton-descargar');
 const inputNuevaEstrategia = document.getElementById('inputNuevaEstrategia');
 const inputNuevaTactica = document.getElementById('inputNuevaTactica');
 const inputMonto = document.getElementById('input-monto');
+const selectTacticas = document.getElementById('select-tacticas');
+
 /**
  *  On load, called to load the auth2 library and API client library.
  */
@@ -58,8 +60,11 @@ function actualizarUIBuscador() {
 function actualizarUIAdmin() {
     botonEditar.hidden = false;
     inputMonto.disabled = false;
-    divCrearEstrategias.hidden = false;
-    divCrearTacticas.hidden = false;
+    selectTacticas.disabled = false;
+    $('input[type=checkbox]').each(function () {
+        $(this).prop("disabled", false);
+    });
+    $('#select-tacticas').tokenize2().enable();
 }
 
 /**

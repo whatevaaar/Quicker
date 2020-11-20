@@ -68,6 +68,7 @@ function crearSelectbox(clave, nombre) {
     selectDetonante.onchange = function () {
         actualizarPropuesta(nombre);
     };
+    selectDetonante.disabled = !esAdmin();
     return selectDetonante;
 }
 
@@ -114,6 +115,7 @@ function crearRadiosEstado(clave, nombre) {
     });
     div.appendChild(input);
     div.appendChild(label);
+    input.disabled = !esAdmin();
     return div;
 }
 
