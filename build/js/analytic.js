@@ -1,77 +1,97 @@
 window.onload = obtenerDatos();
 
 let industriasConNumeroDeAceptacion = [];
+let clientesConRetornoAcumulado = [];
+let clientesConRetornoDesglozado = [];
 let clientesConNumeroDeAceptacion = [];
 let detonantesConNumeroDeAceptacion = [];
 
+let MAX_DATOS_MONTO = 5;
+
 function actualizarListaIndustria(industriaPropuesta, estado) {
-    let resultado = industriasConNumeroDeAceptacion.find( ({ industria }) => industria === industriaPropuesta );
-    if (resultado){
+    let resultado = industriasConNumeroDeAceptacion.find(({industria}) => industria === industriaPropuesta);
+    if (resultado) {
         if (estado === "Aceptado")
             resultado.aceptado += 1;
-        else if(estado === "Rechazado")
+        else if (estado === "Rechazado")
             resultado.rechazado += 1;
-        else if(estado === "Pendiente")
+        else if (estado === "Pendiente")
             resultado.pendiente += 1;
-    }
-    else{
+    } else {
         industriasConNumeroDeAceptacion.push({
             industria: industriaPropuesta,
-            aceptado: estado === "Aceptado" ? 1: 0,
-            rechazado: estado === "Rechazado" ? 1:0,
-            pendiente: estado === "Pendiente" ? 1:0
+            aceptado: estado === "Aceptado" ? 1 : 0,
+            rechazado: estado === "Rechazado" ? 1 : 0,
+            pendiente: estado === "Pendiente" ? 1 : 0
         })
     }
 
 }
 
 function actualizarListaCliente(clientePropuesta, estado) {
-    let resultado = clientesConNumeroDeAceptacion.find( ({ cliente }) => cliente === clientePropuesta );
-    if (resultado){
+    let resultado = clientesConNumeroDeAceptacion.find(({cliente}) => cliente === clientePropuesta);
+    if (resultado) {
         if (estado === "Aceptado")
             resultado.aceptado += 1;
-        else if(estado === "Rechazado")
+        else if (estado === "Rechazado")
             resultado.rechazado += 1;
-        else if(estado === "Pendiente")
+        else if (estado === "Pendiente")
             resultado.pendiente += 1;
-    }
-    else{
+    } else {
         clientesConNumeroDeAceptacion.push({
             cliente: clientePropuesta,
-            aceptado: estado === "Aceptado" ? 1: 0,
-            rechazado: estado === "Rechazado" ? 1:0,
-            pendiente: estado === "Pendiente" ? 1:0
+            aceptado: estado === "Aceptado" ? 1 : 0,
+            rechazado: estado === "Rechazado" ? 1 : 0,
+            pendiente: estado === "Pendiente" ? 1 : 0
         })
     }
 
 }
 
 function actualizarListaDetonantes(detonantePropuesta, estado) {
-    let resultado = detonantesConNumeroDeAceptacion.find( ({ detonante }) => detonante === detonantePropuesta );
-    if (resultado){
+    let resultado = detonantesConNumeroDeAceptacion.find(({detonante}) => detonante === detonantePropuesta);
+    if (resultado) {
         if (estado === "Aceptado")
             resultado.aceptado += 1;
-        else if(estado === "Rechazado")
+        else if (estado === "Rechazado")
             resultado.rechazado += 1;
-    }
-    else{
+    } else {
         detonantesConNumeroDeAceptacion.push({
             detonante: detonantePropuesta,
-            aceptado: estado === "Aceptado" ? 1: 0,
-            rechazado: estado === "Rechazado" ? 1:0,
+            aceptado: estado === "Aceptado" ? 1 : 0,
+            rechazado: estado === "Rechazado" ? 1 : 0,
         })
     }
 
 }
 
-function obtenerDatos(){
+function actualizarListaMonto(clienteP, monto, estado) {
+    let resultado = clientesConRetornoAcumulado.find(({cliente}) => cliente === clienteP);
+    if (estado != "Aceptado" || monto < 0)
+        return;
+    clientesConRetornoDesglozado.push({
+        cliente: clienteP,
+        monto: monto
+    })
+    if (resultado)
+        resultado.monto += monto;
+    else{
+        clientesConRetornoAcumulado.push({
+            cliente: clienteP,
+            monto: monto
+        })
+    }
+
+}
+
+function obtenerDatos() {
     let query = firebase.database().ref("propuestas/");
     query.on("value", function (snapshot) {
         if (snapshot.empty)
             return;
         snapshot.forEach(function (childSnapshot) {
             let childData = childSnapshot.val();
-            if ( !childSnapshot.child('estado').exists() || !childSnapshot.child('detonante').exists())
+            if (!childSnapshot.child('estado').exists() || !childSnapshot.child('detonante').exists())
                 return;
             let cliente = regresarNombreDeCliente(childData.nombre);
             let industria = regresarIndustria(childData.nombre);
@@ -79,6 +99,9 @@ function obtenerDatos(){
             actualizarListaIndustria(industria, childData.estado);
             actualizarListaCliente(cliente, childData.estado);
             actualizarListaDetonantes(childData.detonante, childData.estado);
+            actualizarListaMonto(cliente, childData.monto, childData.estado);
+            clientesConRetornoAcumulado.sort((a, b) => b.monto - a.monto);
+            clientesConRetornoDesglozado.sort((a, b) => b.monto - a.monto);
         });
         generarGraficas();
     }, function (error) {
@@ -101,10 +124,9 @@ function generarGraficas() {
         var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
 
         var areaChartData = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: clientesConRetornoDesglozado.slice(0, MAX_DATOS_MONTO).map(i => i.cliente),
             datasets: [
                 {
-                    label: 'Digital Goods',
                     backgroundColor: 'rgba(60,141,188,0.9)',
                     borderColor: 'rgba(60,141,188,0.8)',
                     pointRadius: false,
@@ -112,19 +134,8 @@ function generarGraficas() {
                     pointStrokeColor: 'rgba(60,141,188,1)',
                     pointHighlightFill: '#fff',
                     pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data: [28, 48, 40, 19, 86, 27, 90]
-                },
-                {
-                    label: 'Electronics',
-                    backgroundColor: 'rgba(210, 214, 222, 1)',
-                    borderColor: 'rgba(210, 214, 222, 1)',
-                    pointRadius: false,
-                    pointColor: 'rgba(210, 214, 222, 1)',
-                    pointStrokeColor: '#c1c7d1',
-                    pointHighlightFill: '#fff',
-                    pointHighlightStroke: 'rgba(220,220,220,1)',
-                    data: [65, 59, 80, 81, 56, 55, 40]
-                },
+                    data:clientesConRetornoDesglozado.slice(0, MAX_DATOS_MONTO).map(i => i.monto)
+                }
             ]
         }
 
@@ -150,7 +161,7 @@ function generarGraficas() {
 
         // This will get the first returned node in the jQuery collection.
         var areaChart = new Chart(areaChartCanvas, {
-            type: 'line',
+            type: 'bar',
             data: areaChartData,
             options: areaChartOptions
         })
@@ -160,13 +171,26 @@ function generarGraficas() {
         //--------------
         var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
         var lineChartOptions = $.extend(true, {}, areaChartOptions)
-        var lineChartData = $.extend(true, {}, areaChartData)
+        var lineChartData = {
+            labels: clientesConRetornoAcumulado.slice(0, MAX_DATOS_MONTO).map(i => i.cliente),
+            datasets: [
+                {
+                    backgroundColor: 'rgba(60,141,188,0.9)',
+                    borderColor: 'rgba(60,141,188,0.8)',
+                    pointRadius: false,
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(60,141,188,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data:clientesConRetornoAcumulado.slice(0, MAX_DATOS_MONTO).map(i => i.monto)
+                }
+            ]
+        }
         lineChartData.datasets[0].fill = false;
-        lineChartData.datasets[1].fill = false;
         lineChartOptions.datasetFill = false
 
         var lineChart = new Chart(lineChartCanvas, {
-            type: 'line',
+            type: 'polarArea',
             data: lineChartData,
             options: lineChartOptions
         })
@@ -177,10 +201,10 @@ function generarGraficas() {
         // Get context with jQuery - using jQuery's .get() method.
         var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
         var donutData = {
-            labels:  detonantesConNumeroDeAceptacion.filter(i => i.aceptado > 0).map(i => i.detonante),
+            labels: detonantesConNumeroDeAceptacion.filter(i => i.aceptado > 0).map(i => i.detonante),
             datasets: [
                 {
-                    data:detonantesConNumeroDeAceptacion.filter(i => i.aceptado > 0).map(i => i.aceptado) ,
+                    data: detonantesConNumeroDeAceptacion.filter(i => i.aceptado > 0).map(i => i.aceptado),
                     backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
                 }
             ]
@@ -203,10 +227,10 @@ function generarGraficas() {
         // Get context with jQuery - using jQuery's .get() method.
         var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
         var pieData = {
-            labels:  industriasConNumeroDeAceptacion.map(i => i.industria),
+            labels: industriasConNumeroDeAceptacion.map(i => i.industria),
             datasets: [
                 {
-                    data:industriasConNumeroDeAceptacion.map(i => i.rechazado) ,
+                    data: industriasConNumeroDeAceptacion.map(i => i.rechazado),
                     backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
                 }
             ]
@@ -228,7 +252,7 @@ function generarGraficas() {
         //-------------
         var barChartCanvas = $('#barChart').get(0).getContext('2d')
         var barChartData = {
-            labels:  industriasConNumeroDeAceptacion.map(i => i.industria),
+            labels: industriasConNumeroDeAceptacion.map(i => i.industria),
             datasets: [
                 {
                     label: 'Aceptado',
@@ -272,7 +296,7 @@ function generarGraficas() {
         //---------------------
         var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
         var stackedBarChartData = {
-            labels:  clientesConNumeroDeAceptacion.map(i => i.cliente),
+            labels: clientesConNumeroDeAceptacion.map(i => i.cliente),
             datasets: [
                 {
                     label: 'Aceptado',

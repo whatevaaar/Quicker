@@ -11,11 +11,6 @@ const inputMonto = document.getElementById('input-monto');
  *  On load, called to load the auth2 library and API client library.
  */
 
-window.onload = actualizarFormulario();
-
-function actualizarFormulario() {
-}
-
 function handleClientLoadLogin() {
     gapi.load('client:auth2', initClient);
 }
@@ -50,61 +45,14 @@ function updateSigninStatus(isSignedIn) {
 }
 
 function transferir() {
-    crearListaDePadres();
+    listFiles();
 }
 
 function actualizarUIBuscador() {
     actualizarUILogged();
-    crearListaDePadres("");
+    listFiles();
     if (esAdmin())
         actualizarUIAdmin();
-}
-
-function crearListaDePadres(token) {
-    let listaDeIdDeCarpetasPadre = [];
-    let queryPadres = "";
-    gapi.client.drive.files.list({
-        'q': "'0AA9UZB_ARqnhUk9PVA' in parents and mimeType = 'application/vnd.google-apps.folder'",
-        'corpora': "allDrives",
-        'includeItemsFromAllDrives': true,
-        'supportsAllDrives': true,
-        'pageToken': token,
-        'fields': "nextPageToken, files(id, name)"
-    }).then(function (response) {
-        let files = response.result.files;
-        let nToken = response.result.nextPageToken;
-        if (files && files.length > 0) {
-            files.forEach(file => {
-                if (listaDeIdDeCarpetasPadre.length > 100) {
-
-                    queryPadres = queryPadres.slice(0, -4);
-                    listaDeIdDeCarpetasPadre.forEach(id => {
-                        queryPadres = queryPadres + "'" + id + "' in parents or ";
-                    });
-                    listFiles(queryPadres);
-                    queryPadres = "";
-                    listaDeIdDeCarpetasPadre = [];
-                }
-                listaDeIdDeCarpetasPadre.push(file.id);
-            });
-            console.log(files.length);
-            listaDeIdDeCarpetasPadre.forEach(id => {
-                queryPadres = queryPadres + "'" + id + "' in parents or ";
-            });
-            queryPadres = queryPadres.slice(0, -4);
-            listFiles(queryPadres);
-            queryPadres = "";
-        }
-        if (nToken) {
-            listFiles(queryPadres);
-            crearListaDePadres(nToken);
-            queryPadres = "";
-            listaDeIdDeCarpetasPadre = [];
-        } else {
-            configurarTabla();
-            $('#loading').hide();
-        }
-    });
 }
 
 function actualizarUIAdmin() {
@@ -121,28 +69,34 @@ function handleAuthClick(event) {
     gapi.auth2.getAuthInstance().signIn();
 }
 
-function listFiles(queryPadres) {
-    if (queryPadres === "")
-        return;
+function listFiles(token) {
     limpiarTabla();
     let query = ["mimeType != 'application/vnd.google-apps.folder'",
         "and",
         "trashed = false",
         "and",
-        "(" + queryPadres + ")",
+        "'0AN75N3P23eTJUk9PVA' in parents",
     ].join(' ');
     gapi.client.drive.files.list({
         'q': query,
         'corpora': 'allDrives',
         'includeItemsFromAllDrives': true,
         'supportsAllDrives': true,
+        'pageToken': token,
         'fields': "nextPageToken, files(id, name, webContentLink, parents)"
     }).then(function (response) {
-        var files = response.result.files;
+        let files = response.result.files;
+        let nToken = response.result.nextPageToken;
         if (files && files.length > 0) {
             files.forEach(function (file, i) {
                 listaArchivos.push(file);
             });
+            if (nToken)
+                listFiles(nToken)
+            else {
+                configurarTabla();
+                $('#loading').hide();
+            }
         } else $('.toast').toast('show');
     });
 }

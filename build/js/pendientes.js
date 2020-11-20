@@ -10,7 +10,7 @@ const inputNuevoDetonante = document.getElementById('inputNuevoDetonante');
 
 function conseguirPropuestas() {
     let query = firebase.database().ref("propuestas");
-    query.on("value", function (snapshot) {
+    query.once("value").then(function (snapshot) {
         if (snapshot.empty)
             return;
         snapshot.forEach(function (childSnapshot) {
