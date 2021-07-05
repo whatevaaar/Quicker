@@ -8,7 +8,7 @@
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- DataTables -->
@@ -23,403 +23,456 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
-<div id="loading">
-    <img id="loading-image" src="dist/img/loading.gif" alt="Loading..."/>
-</div>
-<div class="wrapper">
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <!-- Left navbar links -->
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="index.html" class="nav-link">Inicio</a>
-            </li>
-        </ul>
-
-        <!-- SEARCH FORM -->
-
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                    <i class="fas fa-expand-arrows-alt"></i>
-                </a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" id="boton-signout" class="nav-link">Sign Out</a>
-            </li>
-        </ul>
-    </nav>
-    <!-- /.navbar -->
-
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <!-- Brand Logo -->
-        <a href="index.html" class="brand-link">
-            <img src="dist/img/logo-extrategia.png" alt="AdminLTE Logo" class="img-fluid"
-            >
-        </a>
-
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <!-- Sidebar user (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="info">
-                    <a href="#" class="d-block" id="nombre-perfil"></a>
-                </div>
-            </div>
-
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                       with font-awesome or any other icon font library -->
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <span class="icon-buscador"></span>
-                            <p>
-                                Búsqueda de propuestas
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="analytic.html" class="nav-link">
-                            <p>
-                                <span class="icon-analytics"></span>
-                                Analytic
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="generador.html" class="nav-link">
-                            <span class="icon-generador"></span>
-                            <p>
-                                Generador de Estrategias
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="pendientes.html" class="nav-link">
-                            <span class="icon-aprobadas"></span>
-                            <p>Pendientes de aprobación</p>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-        </div>
-        <!-- /.sidebar -->
-    </aside>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Búsqueda de propuestas</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-                            <li class="breadcrumb-item active">Búsqueda de propuestas</li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-auto">
-                        <!-- /.card -->
-
-                        <div class="card">
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Cliente</th>
-                                        <th>Industria</th>
-                                        <th>Producto</th>
-                                        <th>Fecha</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="cuerpo-tabla"></tbody>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                    <div class="col">
-
-                        <!-- /.card -->
-
-                        <div class="card">
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <h5 class="card-title">Detalle de la propuesta</h5>
-                                <br/>
-                                <form onsubmit="editarPropuesta()">
-                                    <div class="form-group">
-                                        <p><strong>Monto</strong></p>
-                                        <label class="sr-only" for="input-monto">Monto Total</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">$</div>
-                                            </div>
-                                            <input type="number" class="form-control" id="input-monto" disabled
-                                                   placeholder="0" min="0">
-                                        </div>
-                                        <p><strong>Estrategias</strong></p>
-                                        <div class="container-fluid" id="div-estrategias">
-                                            <div class="form-check"><input id="Comunicación" class="form-check-input"
-                                                                           type="checkbox"
-                                                                           disabled
-                                                                           value="Comunicación"><label
-                                                    for="Comunicación">Comunicación</label></div>
-                                            <div class="form-check"><input id="Medios" class="form-check-input"
-                                                                           type="checkbox"
-                                                                           disabled
-                                                                           value="Medios"><label
-                                                    for="Medios">Medios</label></div>
-                                            <div class="form-check"><input id="Relaciones Públicas"
-                                                                           class="form-check-input" type="checkbox"
-                                                                           disabled
-                                                                           value="Relaciones Públicas"><label
-                                                    for="Relaciones Públicas">Relaciones Públicas</label></div>
-                                            <div class="form-check"><input id="Digital" class="form-check-input"
-                                                                           type="checkbox"
-                                                                           disabled
-                                                                           value="Digital"><label
-                                                    for="Digital">Digital</label></div>
-                                            <div class="form-check"><input id="Academy" class="form-check-input"
-                                                                           type="checkbox"
-                                                                           disabled
-                                                                           value="Academy"><label
-                                                    for="Academy">Academy</label></div>
-                                            <div class="form-check"><input id="Multimedia" class="form-check-input"
-                                                                           type="checkbox"
-                                                                           disabled
-                                                                           value="Multimedia"><label for="Multimedia">Multimedia</label>
-                                            </div>
-                                            <div class="form-check"><input id="Branding" class="form-check-input"
-                                                                           type="checkbox"
-                                                                           disabled
-                                                                           value="Branding"><label for="Branding">Branding</label>
-                                            </div>
-                                            <div class="form-check"><input id="Crisis" class="form-check-input"
-                                                                           type="checkbox"
-                                                                           disabled
-                                                                           value="Crisis"><label
-                                                    for="Crisis">Crisis</label></div>
-                                            <div class="form-check"><input id="Investigación" class="form-check-input"
-                                                                           type="checkbox"
-                                                                           disabled
-                                                                           value="Investigación"><label
-                                                    for="Investigación">Investigación</label></div>
-                                            <div class="form-check"><input id="Internal Comms" class="form-check-input"
-                                                                           type="checkbox"
-                                                                           disabled
-                                                                           value="Internal Comms"><label
-                                                    for="Internal Comms">Internal Comms</label></div>
-                                            <div class="form-check"><input id="Asuntos Públicos"
-                                                                           disabled
-                                                                           class="form-check-input" type="checkbox"
-                                                                           value="Asuntos Públicos"><label
-                                                    for="Asuntos Públicos">Asuntos Públicos</label></div>
-                                        </div>
-                                        <p><strong>Tácticas</strong></p>
-                                        <div class="container-fluid" id="div-tacticas">
-                                            <select disabled class="demo" id="select-tacticas" multiple>
-                                                <option value="Paquete de documentación estratégico">Paquete de
-                                                    documentación estratégico
-                                                </option>
-                                                <option value="Manuales de comunicación, externa, interna, crisis">
-                                                    Manuales de comunicación, externa, interna, crisis
-                                                </option>
-                                                <option value="Presencia Básica">Presencia Básica</option>
-                                                <option value="Día de medios">Día de medios</option>
-                                                <option value="Media Tours">Media Tours</option>
-                                                <option value="Convocatoria de eventos para medios">Convocatoria de
-                                                    eventos para medios
-                                                </option>
-                                                <option value="Consejo de periodistas">Consejo de periodistas</option>
-                                                <option value="Entrevistas one on one">Entrevistas one on one</option>
-                                                <option value="Cambio de percepción mediática">Cambio de percepción
-                                                    mediática
-                                                </option>
-                                                <option value="Columnas Fijas">Columnas Fijas</option>
-                                                <option value="Relaciones mediáticas / Seminarios">Relaciones mediáticas
-                                                    / Seminarios
-                                                </option>
-                                                <option value="Redes Sociales">Redes Sociales</option>
-                                                <option value="Foro de Negocios">Foro de Negocios</option>
-                                                <option value="Relaciones empresariales">Relaciones empresariales
-                                                </option>
-                                                <option value="Relaciones sociales">Relaciones sociales</option>
-                                                <option value="Relaciones comerciales">Relaciones comerciales</option>
-                                                <option value="Relaciones académicas">Relaciones académicas</option>
-                                                <option value="Visibilidad del CEO">Visibilidad del CEO</option>
-                                                <option value="Lanzamientos">Lanzamientos</option>
-                                                <option value="Reuniones de relacionamiento">Reuniones de
-                                                    relacionamiento
-                                                </option>
-                                                <option value="Acercamientos con líderes de opinión"> Acercamientos con
-                                                    líderes de opinión
-                                                </option>
-                                                <option value="Influencers Y Celebrities">Influencers Y Celebrities
-                                                </option>
-                                                <option value="Eventos">Eventos</option>
-                                                <option value="Presencia en foros">Presencia en foros</option>
-                                                <option value="Alianzas estratégicas">Alianzas estratégicas</option>
-                                                <option value="Manejo de redes sociales">Manejo de redes sociales
-                                                </option>
-                                                <option value="Campañas Display Ads">Campañas Display Ads</option>
-                                                <option value="Campaña de redes sociales">Campaña de redes sociales
-                                                </option>
-                                                <option value="Hostings, Dominios">Hostings, Dominios</option>
-                                                <option value="Páginas Web">Páginas Web</option>
-                                                <option value="Mantenimiento web">Mantenimiento web</option>
-                                                <option value="Aplicaciones digitales">Aplicaciones digitales</option>
-                                                <option value="Landing pages para campañas">Landing pages para
-                                                    campañas
-                                                </option>
-                                                <option value="Gestión de Whatsapp Business">Gestión de Whatsapp
-                                                    Business
-                                                </option>
-                                                <option value="Diseño de blog">Diseño de blog</option>
-                                                <option value="Talleres varios no enlistados">Talleres varios no
-                                                    enlistados
-                                                </option>
-                                                <option value="Media training">Media training</option>
-                                                <option value="Crisis training">Crisis training</option>
-                                                <option value="Public speaking training">Public speaking training
-                                                </option>
-                                                <option value="Video para eventos">Video para eventos</option>
-                                                <option value="Levantamiento de video testimonial">Levantamiento de
-                                                    video testimonial
-                                                </option>
-                                                <option value="Edición de video">Edición de video</option>
-                                                <option value="Levantamiento fotográfico y shootings">Levantamiento
-                                                    fotográfico y shootings
-                                                </option>
-                                                <option value="Fotografía corporativa">Fotografía corporativa</option>
-                                                <option value="Branding e identidad gráfica corporativa">Branding e
-                                                    identidad gráfica corporativa
-                                                </option>
-                                                <option value="Naming de marca">Naming de marca</option>
-                                                <option value="Diseño editorial">Diseño editorial</option>
-                                                <option value="Arquitectura de marca">Arquitectura de marca</option>
-                                                <option value="Manejo de crisis mediática">Manejo de crisis mediática
-                                                </option>
-                                                <option value="Comité de comunicación y prevención">Comité de
-                                                    comunicación y prevención
-                                                </option>
-                                                <option value="Benchmarks de competencia">Benchmarks de competencia
-                                                </option>
-                                                <option value="Estudios de mercado corto alcance">Estudios de mercado
-                                                    corto alcance
-                                                </option>
-                                                <option value="Estudios de mercado medio alcance">Estudios de mercado
-                                                    medio alcance
-                                                </option>
-                                                <option value="Estudios de mercado largo alcance">Estudios de mercado
-                                                    largo alcance
-                                                </option>
-                                                <option value="Monitoreo de medios o SCAN">Monitoreo de medios o SCAN
-                                                </option>
-                                                <option value="M.A.P.">M.A.P.</option>
-                                                <option value="Business and media intelligence">Business and media
-                                                    intelligence
-                                                </option>
-                                                <option value="Comunicación interna">Comunicación interna</option>
-                                                <option value="Asuntos públicos, servicios básicos">Asuntos públicos,
-                                                    servicios básicos
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <button id="boton-editar" hidden="true" type="submit"
-                                                class="btn btn-outline-info">Guardar
-                                        </button>
-                                        <a id="boton-descargar" download class="btn btn-outline-success">Descargar</a>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                        <!-- /.card -->
-
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-            <!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
+    <div id="loading">
+        <img id="loading-image" src="dist/img/loading.gif" alt="Loading..." />
     </div>
-    <!-- /.content-wrapper -->
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="index.html" class="nav-link">Inicio</a>
+                </li>
+            </ul>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+            <!-- SEARCH FORM -->
 
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" id="boton-signout" class="nav-link">Sign Out</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="index.html" class="brand-link">
+                <img src="dist/img/logo-extrategia.png" alt="AdminLTE Logo" class="img-fluid">
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="info">
+                        <a href="#" class="d-block" id="nombre-perfil"></a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                       with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="icon-buscador"></span>
+                                <p>
+                                    Búsqueda de propuestas
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="analytic.html" class="nav-link">
+                                <span class="icon-analytics"></span>
+                                <p>
+                                    Analytic
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="generador.html" class="nav-link">
+                                <span class="icon-generador"></span>
+                                <p>
+                                    Generador de Estrategias
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pendientes.html" class="nav-link">
+                                <span class="icon-aprobadas"></span>
+                                <p>Pendientes de aprobación</p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Búsqueda de propuestas</h1>
+                            <a href="#modalAgregar" data-toggle="modal"
+                                data-target="#modalAgregar"><small>Agregar</small></a>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                                <li class="breadcrumb-item active">Búsqueda de propuestas</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-auto">
+                            <!-- /.card -->
+
+                            <div class="card">
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Cliente</th>
+                                                <th>Industria</th>
+                                                <th>Producto</th>
+                                                <th>Fecha</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="cuerpo-tabla"></tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <div class="col">
+
+                            <!-- /.card -->
+
+                            <div class="card">
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <h5 class="card-title">Detalle de la propuesta</h5>
+                                    <br />
+                                    <form onsubmit="editarPropuesta()">
+                                        <div class="form-group">
+                                            <p><strong>Monto</strong></p>
+                                            <label class="sr-only" for="input-monto">Monto Total</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">$</div>
+                                                </div>
+                                                <input type="number" class="form-control" id="input-monto" disabled
+                                                    placeholder="0" min="0">
+                                            </div>
+                                            <p><strong>Estrategias</strong></p>
+                                            <div class="container-fluid" id="div-estrategias">
+                                                <div class="form-check"><input id="Comunicación"
+                                                        class="form-check-input" type="checkbox" disabled
+                                                        value="Comunicación"><label
+                                                        for="Comunicación">Comunicación</label></div>
+                                                <div class="form-check"><input id="Medios" class="form-check-input"
+                                                        type="checkbox" disabled value="Medios"><label
+                                                        for="Medios">Medios</label></div>
+                                                <div class="form-check"><input id="Relaciones Públicas"
+                                                        class="form-check-input" type="checkbox" disabled
+                                                        value="Relaciones Públicas"><label
+                                                        for="Relaciones Públicas">Relaciones Públicas</label></div>
+                                                <div class="form-check"><input id="Digital" class="form-check-input"
+                                                        type="checkbox" disabled value="Digital"><label
+                                                        for="Digital">Digital</label></div>
+                                                <div class="form-check"><input id="Academy" class="form-check-input"
+                                                        type="checkbox" disabled value="Academy"><label
+                                                        for="Academy">Academy</label></div>
+                                                <div class="form-check"><input id="Multimedia" class="form-check-input"
+                                                        type="checkbox" disabled value="Multimedia"><label
+                                                        for="Multimedia">Multimedia</label>
+                                                </div>
+                                                <div class="form-check"><input id="Branding" class="form-check-input"
+                                                        type="checkbox" disabled value="Branding"><label
+                                                        for="Branding">Branding</label>
+                                                </div>
+                                                <div class="form-check"><input id="Crisis" class="form-check-input"
+                                                        type="checkbox" disabled value="Crisis"><label
+                                                        for="Crisis">Crisis</label></div>
+                                                <div class="form-check"><input id="Investigación"
+                                                        class="form-check-input" type="checkbox" disabled
+                                                        value="Investigación"><label
+                                                        for="Investigación">Investigación</label></div>
+                                                <div class="form-check"><input id="Internal Comms"
+                                                        class="form-check-input" type="checkbox" disabled
+                                                        value="Internal Comms"><label for="Internal Comms">Internal
+                                                        Comms</label></div>
+                                                <div class="form-check"><input id="Asuntos Públicos" disabled
+                                                        class="form-check-input" type="checkbox"
+                                                        value="Asuntos Públicos"><label for="Asuntos Públicos">Asuntos
+                                                        Públicos</label></div>
+                                            </div>
+                                            <p><strong>Tácticas</strong></p>
+                                            <div class="container-fluid" id="div-tacticas">
+                                                <select disabled class="demo" id="select-tacticas" multiple>
+                                                    <option value="Paquete de documentación estratégico">Paquete de
+                                                        documentación estratégico
+                                                    </option>
+                                                    <option value="Manuales de comunicación, externa, interna, crisis">
+                                                        Manuales de comunicación, externa, interna, crisis
+                                                    </option>
+                                                    <option value="Presencia Básica">Presencia Básica</option>
+                                                    <option value="Día de medios">Día de medios</option>
+                                                    <option value="Media Tours">Media Tours</option>
+                                                    <option value="Convocatoria de eventos para medios">Convocatoria de
+                                                        eventos para medios
+                                                    </option>
+                                                    <option value="Consejo de periodistas">Consejo de periodistas
+                                                    </option>
+                                                    <option value="Entrevistas one on one">Entrevistas one on one
+                                                    </option>
+                                                    <option value="Cambio de percepción mediática">Cambio de percepción
+                                                        mediática
+                                                    </option>
+                                                    <option value="Columnas Fijas">Columnas Fijas</option>
+                                                    <option value="Relaciones mediáticas / Seminarios">Relaciones
+                                                        mediáticas
+                                                        / Seminarios
+                                                    </option>
+                                                    <option value="Redes Sociales">Redes Sociales</option>
+                                                    <option value="Foro de Negocios">Foro de Negocios</option>
+                                                    <option value="Relaciones empresariales">Relaciones empresariales
+                                                    </option>
+                                                    <option value="Relaciones sociales">Relaciones sociales</option>
+                                                    <option value="Relaciones comerciales">Relaciones comerciales
+                                                    </option>
+                                                    <option value="Relaciones académicas">Relaciones académicas</option>
+                                                    <option value="Visibilidad del CEO">Visibilidad del CEO</option>
+                                                    <option value="Lanzamientos">Lanzamientos</option>
+                                                    <option value="Reuniones de relacionamiento">Reuniones de
+                                                        relacionamiento
+                                                    </option>
+                                                    <option value="Acercamientos con líderes de opinión"> Acercamientos
+                                                        con
+                                                        líderes de opinión
+                                                    </option>
+                                                    <option value="Influencers Y Celebrities">Influencers Y Celebrities
+                                                    </option>
+                                                    <option value="Eventos">Eventos</option>
+                                                    <option value="Presencia en foros">Presencia en foros</option>
+                                                    <option value="Alianzas estratégicas">Alianzas estratégicas</option>
+                                                    <option value="Manejo de redes sociales">Manejo de redes sociales
+                                                    </option>
+                                                    <option value="Campañas Display Ads">Campañas Display Ads</option>
+                                                    <option value="Campaña de redes sociales">Campaña de redes sociales
+                                                    </option>
+                                                    <option value="Hostings, Dominios">Hostings, Dominios</option>
+                                                    <option value="Páginas Web">Páginas Web</option>
+                                                    <option value="Mantenimiento web">Mantenimiento web</option>
+                                                    <option value="Aplicaciones digitales">Aplicaciones digitales
+                                                    </option>
+                                                    <option value="Landing pages para campañas">Landing pages para
+                                                        campañas
+                                                    </option>
+                                                    <option value="Gestión de Whatsapp Business">Gestión de Whatsapp
+                                                        Business
+                                                    </option>
+                                                    <option value="Diseño de blog">Diseño de blog</option>
+                                                    <option value="Talleres varios no enlistados">Talleres varios no
+                                                        enlistados
+                                                    </option>
+                                                    <option value="Media training">Media training</option>
+                                                    <option value="Crisis training">Crisis training</option>
+                                                    <option value="Public speaking training">Public speaking training
+                                                    </option>
+                                                    <option value="Video para eventos">Video para eventos</option>
+                                                    <option value="Levantamiento de video testimonial">Levantamiento de
+                                                        video testimonial
+                                                    </option>
+                                                    <option value="Edición de video">Edición de video</option>
+                                                    <option value="Levantamiento fotográfico y shootings">Levantamiento
+                                                        fotográfico y shootings
+                                                    </option>
+                                                    <option value="Fotografía corporativa">Fotografía corporativa
+                                                    </option>
+                                                    <option value="Branding e identidad gráfica corporativa">Branding e
+                                                        identidad gráfica corporativa
+                                                    </option>
+                                                    <option value="Naming de marca">Naming de marca</option>
+                                                    <option value="Diseño editorial">Diseño editorial</option>
+                                                    <option value="Arquitectura de marca">Arquitectura de marca</option>
+                                                    <option value="Manejo de crisis mediática">Manejo de crisis
+                                                        mediática
+                                                    </option>
+                                                    <option value="Comité de comunicación y prevención">Comité de
+                                                        comunicación y prevención
+                                                    </option>
+                                                    <option value="Benchmarks de competencia">Benchmarks de competencia
+                                                    </option>
+                                                    <option value="Estudios de mercado corto alcance">Estudios de
+                                                        mercado
+                                                        corto alcance
+                                                    </option>
+                                                    <option value="Estudios de mercado medio alcance">Estudios de
+                                                        mercado
+                                                        medio alcance
+                                                    </option>
+                                                    <option value="Estudios de mercado largo alcance">Estudios de
+                                                        mercado
+                                                        largo alcance
+                                                    </option>
+                                                    <option value="Monitoreo de medios o SCAN">Monitoreo de medios o
+                                                        SCAN
+                                                    </option>
+                                                    <option value="M.A.P.">M.A.P.</option>
+                                                    <option value="Business and media intelligence">Business and media
+                                                        intelligence
+                                                    </option>
+                                                    <option value="Comunicación interna">Comunicación interna</option>
+                                                    <option value="Asuntos públicos, servicios básicos">Asuntos
+                                                        públicos,
+                                                        servicios básicos
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <button id="boton-editar" hidden="true" type="submit"
+                                                class="btn btn-outline-info">Guardar
+                                            </button>
+                                            <a id="boton-descargar" download
+                                                class="btn btn-outline-success">Descargar</a>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                            <!-- /.card -->
+
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <div class="modal fade" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="input-cliente">Nombre del cliente</label>
+                        <input type="email" class="form-control" id="input-cliente" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-industria">Industria</label>
+                        <select class="form-control" id="input-industria">
+                            <option>ALIMENTOS</option>
+                            <option>FARMA</option>
+                            <option>INFRAESTRUCTURA </option>
+                            <option>SERVICIOS</option>
+                            <option>FINANZAS</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-producto">Producto</label>
+                        <select class="form-control" id="input-producto">
+                            <option>PR</option>
+                            <option>CON</option>
+                            <option>APU</option>
+                            <option>INT</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-fecha">Fecha</label>
+                        <div class="pf-field">
+                            <input placeholder="06.11.2007" id="input-fecha" type="date"
+                                class="form-control datepicker">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="input-file">Archivo</label>
+                        <input type="file" class="form-control"id="input-file" name="input-file" >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+                    <button type="button" onclick="agregarADrive()" class="btn btn-extrategia">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
    https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
-<script type="text/javascript" src="build/js/firebase.js"></script>
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="plugins/jszip/jszip.min.js"></script>
-<script src="plugins/pdfmake/pdfmake.min.js"></script>
-<script src="plugins/pdfmake/vfs_fonts.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
-<!-- Page specific script -->
-<script type="text/javascript" src="build/js/driveApi.js"></script>
-<script type="text/javascript" src="build/js/tokenize2.js"></script>
-<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
+    <script type="text/javascript" src="build/js/firebase.js"></script>
+    <!-- jQuery -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="plugins/jszip/jszip.min.js"></script>
+    <script src="plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script type="text/javascript" src="build/js/driveApi.js"></script>
+    <script type="text/javascript" src="build/js/tokenize2.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"
         onreadystatechange="if (this.readyState === 'complete') this.onload()">
-</script>
-<script>$('.demo').tokenize2({
-    searchFromStart: false
-});</script>
-<script type="text/javascript" src="build/js/buscador.js"></script>
+        </script>
+    <script>$('.demo').tokenize2({
+            searchFromStart: false
+        });</script>
+    <script type="text/javascript" src="build/js/buscador.js"></script>
 </body>
 
 </html>

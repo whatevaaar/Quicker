@@ -74,6 +74,67 @@ function handleAuthClick(event) {
     gapi.auth2.getAuthInstance().signIn();
 }
 
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+async function agregarADrive() {
+    let cliente = document.getElementById('input-cliente').value.replaceAll(' ', '_').trim().toUpperCase();
+    let industria = document.getElementById('input-industria').value;
+    let producto = document.getElementById('input-producto').value;
+    let fechaInput = document.getElementById('input-fecha').value
+    let fecha = new Date(fechaInput);
+    var file = document.getElementById('input-file').files[0];
+
+    var fileMetadata = {
+        'parents': ['0AN75N3P23eTJUk9PVA'], // Folder ID at Google Drive
+        'name':
+            cliente + '-' + industria + '-' + producto + '-'
+            + fecha.getDate() + '_' + conseguirClaveDeMes(fecha.getMonth() + 1) + '_' + fecha.getFullYear() + '.' + file.name.substring(file.name.lastIndexOf('.') + 1) // Filename at Google Drive
+    };
+    var r = new FileReader();
+    r.readAsText(file);
+    r.onload = function (e) {
+        var body = r.result;
+        var media = {
+            mimeType: file.type,
+            body: body
+        };
+
+
+        gapi.client.drive.files.create({
+            resource: fileMetadata,
+            media: media,
+            fields: 'id'
+        })
+            .then(response => {
+                console.log('response: ', response);
+            })
+            .catch(() => {
+                console.log('something is wrong');
+            });
+    }
+}
+
+function conseguirClaveDeMes(mes) {
+    switch (mes) {
+        case 1: return 'ENE';
+        case 2: return 'FEB';
+        case 3: return 'MAR';
+        case 4: return 'ABR';
+        case 5: return 'MAY';
+        case 6: return 'JUN';
+        case 7: return 'JUL';
+        case 8: return 'AGO';
+        case 9: return 'SEPT';
+        case 10: return 'OCT';
+        case 11: return 'NOV';
+        case 12: return 'DIC';
+    }
+}
+
 function listFiles(token) {
     limpiarTabla();
     let query = ["mimeType != 'application/vnd.google-apps.folder'",
